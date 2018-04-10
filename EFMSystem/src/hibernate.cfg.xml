@@ -4,20 +4,20 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sour
 <hibernate-configuration>
   <session-factory>
 
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://47.74.146.159:3306/ForExWork</property>
-		<property name="hibernate.connection.username">exwork</property>
-		<property name="hibernate.connection.password">123$%^qweRTY</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://47.74.146.159:3306/ForExWork</property>
+        <property name="hibernate.connection.username">exwork</property>
+        <property name="hibernate.connection.password">123$%^qweRTY</property>
 
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		
-		<property name="hibernate.show_sql">false</property> 
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <property name="hibernate.show_sql">false</property> 
 
-		<property name="hibernate.format_sql">true</property> 
+        <property name="hibernate.format_sql">true</property> 
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-		<property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.current_session_context_class">thread</property>
 
 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 
