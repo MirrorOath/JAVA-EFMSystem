@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+#cartTable th{
+	text-align: center;
+}
+#cartTable td{
+	width: 140px;
+	height: 140px;
+	text-align: center;
+}
+#cartTable #cb{
+	margin-top: 40px;
+}
+#cartTable #cbo{
+	width: 30px;
+}

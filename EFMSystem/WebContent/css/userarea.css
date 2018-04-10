@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+.formStyle a:link,a:visited{
+	color: #BAB5B5;
+}
+.formStyle a:hover{
+	color: #92F53C;
+}
+.formStyle a:active{
+	color: #BAB5B5;
+}
+.formStyle a{
+	text-decoration: none;
+}
+
+.formStyle #del,#detail{
+	text-align: right;
+	float: right;
+}
+.formStyle #detail{
+	color: #8AEED3;
+}
+.formStyle #del{
+	color: #F4B24F;
+}
+
+.orderIdStyle{
+	font-size: 2em;
+	color: #BAB5B5;
+}

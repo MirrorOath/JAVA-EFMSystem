@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+
+
+h1, h2, h3, h4, h5, h6{
+	color: red;
+}
+
+#justcenter{
+	text-align: center;
+}
+
+#forSearch{
+	margin: 20% 20%;
+}

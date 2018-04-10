@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+*{
+	margin = 0;
+	padding = 0;
+}
+img{
+	width: 100%;
+}
+h1,h2,h3,h4,h5,h6{
+	text-align: center;
+}
+
+/****************************************** 上方浮动的无序列表样式 ****************************************/
+#navigation{
+	height: 2.2em;
+	line-height: 2.2em;
+	width: 758px;
+	margin: 0 1px;
+	background: #7c7c7c;
+	color: #FFFFFF;
+}
+
+#navigation li{
+	float: left;
+	list-style-type:none;
+	border-right: 1px solid #ffffff;
+	white-space: nowrap;
+}
+
+#navigation li a{
+	dispaly: block;
+	padding: 0 10px;
+	font-size:0.75em;
+	font-weight: normal;
+	text-transform: uppercase;
+	text-decoration: none;
+	background-color: inherit;
+	color: #ffffff;
+}
+
+* html #navigation a{
+	width: 1%;
+}
+
+#navigation .selected, #navigation a:hover{
+	background: #80b0da;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 0.9em;
+}
+/****************************************** 上方浮动的无序列表样式 ****************************************/

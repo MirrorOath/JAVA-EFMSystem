@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+
+#forSearch{
+	margin: 5px 10%;
+}
+.imgdiv{
+	width: 25%;
+	height: 40%;
+	text-align: center;
+	line-height: 0.7em;
+	float: left;
+}
+#lastPage{
+	float: left;
+}
+#nextPage{
+	float: right;
+}
