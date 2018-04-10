@@ -35,13 +35,13 @@
            <aop:around method="around" pointcut-ref="pt"/>
        </aop:aspect>
     </aop:config> -->
-    <mvc:interceptors> 	<!--// 拦截请求过滤器 -->
-		<!--<bean class="service.LoginInterceptor"/>第一种配置：拦截所有请求 -->
+<!--     <mvc:interceptors> 	// 拦截请求过滤器
+		<bean class="service.LoginInterceptor"/>第一种配置：拦截所有请求
 		<mvc:interceptor>
 			<mvc:mapping path="/user/*"/>
-<!-- 			<mvc:mapping path="/cart/*"/>
-			<mvc:mapping path="/order/*"/> -->
+			<mvc:mapping path="/cart/*"/>
+			<mvc:mapping path="/order/*"/>
 			<bean class="service.LoginInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 </beans>

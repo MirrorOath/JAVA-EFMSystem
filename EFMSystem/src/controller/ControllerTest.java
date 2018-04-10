@@ -20,7 +20,7 @@ public class ControllerTest {
             model.addAttribute("test", "test");
 
         }
-        return "redirect:../index.jsp";
+        return "../index.jsp";
     }
 
 }
