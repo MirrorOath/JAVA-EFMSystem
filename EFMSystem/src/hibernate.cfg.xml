@@ -23,10 +23,8 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sour
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 		<property name="hibernate.cache.use_query_cache">true</property>
-		<mapping resource="infoClasses/RgUserInfo.hbm.xml"/>
-		<mapping resource="infoClasses/BookInfo.hbm.xml"/>
-		<mapping resource="infoClasses/CartInfo.hbm.xml"/>
-		<mapping resource="infoClasses/OrderForm.hbm.xml"/>
-		<mapping resource="infoClasses/OrderDetail.hbm.xml"/>
+        <mapping resource="dao/UserInfo.hbm.xml"/>
+        <mapping resource="dao/BillingStrategy.hbm.xml"/>
+        <mapping resource="dao/UseResources.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

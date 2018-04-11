@@ -10,17 +10,6 @@ public class UserInfo {
 	private Integer role;
 	private Integer tactics;
 
-	public UserInfo() {
-	    id = 0;
-	    user_name = "default";
-	    user_id = 0;
-	    password = "default";
-	    age = 0;
-	    address = "default";
-	    role = 0;
-	    tactics = 0;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
