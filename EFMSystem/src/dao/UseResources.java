@@ -1,10 +1,10 @@
 package dao;
 
-import com.mysql.fabric.xmlrpc.base.Data;
+import java.util.Date;
 
 public class UseResources {
 	private Integer id;
-	private Data rcd_time;
+    private Date rcd_time;
 	private Integer cur_used;
 	private Integer user_id;
 
@@ -16,15 +16,15 @@ public class UseResources {
 		this.id = id;
 	}
 
-	public Data getRcd_time() {
-		return rcd_time;
-	}
+	public Date getRcd_time() {
+        return rcd_time;
+    }
 
-	public void setRcd_time(Data rcd_time) {
-		this.rcd_time = rcd_time;
-	}
+    public void setRcd_time(Date rcd_time) {
+        this.rcd_time = rcd_time;
+    }
 
-	public Integer getCur_used() {
+    public Integer getCur_used() {
 		return cur_used;
 	}
 
