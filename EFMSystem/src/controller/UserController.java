@@ -46,12 +46,17 @@ public class UserController {
               session.setAttribute("signInRt", "用户不存在");
               break;
           }
-          if(userInfo.getPassword() == password)
+          if(userInfo.getPassword().equals(password))  {
               session.setAttribute("signInRt", "验证通过");
+              return "redirect:../user.jsp";
+          }
           else
+          {
               session.setAttribute("signInRt", "密码错误");
+              break;
+          }
         } while(false);
-        return "../index.jsp";
+        return "redirect:../index.jsp";
     }
     
 }

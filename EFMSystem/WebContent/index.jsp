@@ -84,6 +84,7 @@
 
     <div>
     registerRt:${registerRt }</br>
+    signInRt:${signInRt }</br>
     </div>
 
 </body>
