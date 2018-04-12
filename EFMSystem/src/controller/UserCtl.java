@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import dao.UseResources;
+import dao.UseResourcesDao;
 import dao.UserInfo;
 import dao.UserInfoDao;
 
@@ -14,7 +18,9 @@ import dao.UserInfoDao;
 
 @Controller
 @RequestMapping(value = "/user/")
-public class UserController {
+public class UserCtl {
+    @Autowired
+    private UseResourcesDao URDao;
     @Autowired
     private UserInfoDao userDao;
     
@@ -48,7 +54,8 @@ public class UserController {
           }
           if(userInfo.getPassword().equals(password))  {
               session.setAttribute("signInRt", "验证通过");
-              return "redirect:../user.jsp";
+              session.setAttribute("userInfo", userInfo);
+              return "redirect:../user/Homepage.jsp";
           }
           else
           {
@@ -57,6 +64,20 @@ public class UserController {
           }
         } while(false);
         return "redirect:../index.jsp";
+    }
+    
+    @RequestMapping(value = "searchRecords")
+    public String searchRecords(Model model, HttpSession session) {
+        UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+        if(userInfo == null)
+            return "redirect:../index.jsp";
+        session.removeAttribute("Records");
+        List<UseResources> Records = URDao.getRecordsByUserId(userInfo.getId());
+        for(UseResources i : Records) {
+            System.out.println(i.toString());
+        }
+        session.setAttribute("Records", Records);
+        return "redirect:../user/Homepage.jsp";
     }
     
 }
