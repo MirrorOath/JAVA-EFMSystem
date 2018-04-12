@@ -4,18 +4,19 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>抄电表记录页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
 <link
     href="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/css/bootstrap.min.css"
-    rel="stylesheet">
-<script
-    src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"></script>
-<script
-    src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    rel="stylesheet" media="screen">
 
 </head>
 <body>
+    <script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
+    <script
+        src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
+
 
 	<form class="form-horizontal" role="form"
 		action="${pageContext.request.contextPath}/admin/copyMeter.action"

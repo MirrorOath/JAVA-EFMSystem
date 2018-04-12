@@ -37,11 +37,11 @@ public class UserCtl {
         userInfo.setUser_name(user_name);
         userInfo.setPassword(password);
         if (userDao.register(userInfo))
-            model.addAttribute("registerRt", "注册成功");
+            session.setAttribute("registerRt", "注册成功");
         else
-            model.addAttribute("registerRt", "注册失败");
+            session.setAttribute("registerRt", "注册失败");
 
-        return "../index.jsp";
+        return "redirect:../index.jsp";
     }
 
     @RequestMapping(value = "signIn")
@@ -49,7 +49,7 @@ public class UserCtl {
         UserInfo userInfo = userDao.getUserByName(user_name);
         do {
             if (userInfo == null) {
-                model.addAttribute("signInRt", "用户不存在");
+                session.setAttribute("signInRt", "用户不存在");
                 break;
             }
             if (userInfo.getPassword().equals(password)) {
@@ -57,7 +57,7 @@ public class UserCtl {
                 session.setAttribute("userInfo", userInfo);
                 return "redirect:../user/Homepage.jsp";
             } else {
-                model.addAttribute("signInRt", "密码错误");
+                session.setAttribute("signInRt", "密码错误");
                 break;
             }
         } while (false);
