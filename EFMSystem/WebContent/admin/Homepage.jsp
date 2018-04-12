@@ -18,6 +18,9 @@
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
+    <a href="${pageContext.request.contextPath }/admin/getAllUsers.action">searchRecords</a>
+    </br>
+
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-2 column">
@@ -48,14 +51,30 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>编号</th>
-							<th>产品</th>
-							<th>交付时间</th>
-							<th>状态</th>
+							<th>id</th>
+							<th>user_name</th>
+							<th>user_id</th>
+							<th>password</th>
+							<th>age</th>
+							<th>address</th>
+							<th>role</th>
+							<th>tactics</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<c:forEach var="user" items="${users }" varStatus="sta">
+							<tr class="success">
+								<td>${user.id }</td>
+								<td>${user.user_name }</td>
+								<td>${user.user_id }</td>
+								<td>${user.password }</td>
+								<td>${user.age }</td>
+								<td>${user.address }</td>
+								<td>${user.role }</td>
+								<td>${user.tactics }</td>
+							</tr>
+						</c:forEach>
+						<!-- 						<tr>
 							<td>1</td>
 							<td>TB - Monthly</td>
 							<td>01/04/2012</td>
@@ -84,7 +103,7 @@
 							<td>TB - Monthly</td>
 							<td>04/04/2012</td>
 							<td>Call in to confirm</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>

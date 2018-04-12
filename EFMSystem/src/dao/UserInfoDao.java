@@ -20,8 +20,17 @@ public class UserInfoDao {
     }
 
     // 返回所有用户
+    @SuppressWarnings("unchecked")
     public List<UserInfo> users() {
-        return null;
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+
+        Query query = session.createQuery("from UserInfo");
+        List<UserInfo> users = (List<UserInfo>) query.list();
+        
+        tx.commit();
+        session.close();
+        return users;
     }
 
     // 根据用户id返回一个用户

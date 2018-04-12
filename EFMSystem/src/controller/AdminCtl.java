@@ -3,6 +3,7 @@ package controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,5 +58,13 @@ public class AdminCtl {
 
         // return "redirect:../admin/CopyMeter.jsp";
     }
+    
+    @RequestMapping(value = "getAllUsers")
+    public String getAllUsers(Model model, HttpSession session) {
+        List<UserInfo> usersInfo = userDao.users();
+        session.setAttribute("users", usersInfo);
+        return "redirect:../admin/Homepage.jsp";
+    }
+    
 
 }
