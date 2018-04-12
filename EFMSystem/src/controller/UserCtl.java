@@ -37,9 +37,9 @@ public class UserCtl {
         userInfo.setUser_name(user_name);
         userInfo.setPassword(password);
         if (userDao.register(userInfo))
-            session.setAttribute("registerRt", "注册成功");
+            model.addAttribute("registerRt", "注册成功");
         else
-            session.setAttribute("registerRt", "注册失败");
+            model.addAttribute("registerRt", "注册失败");
 
         return "../index.jsp";
     }
@@ -49,15 +49,15 @@ public class UserCtl {
         UserInfo userInfo = userDao.getUserByName(user_name);
         do {
             if (userInfo == null) {
-                session.setAttribute("signInRt", "用户不存在");
+                model.addAttribute("signInRt", "用户不存在");
                 break;
             }
             if (userInfo.getPassword().equals(password)) {
-                session.setAttribute("signInRt", "验证通过");
+                model.addAttribute("signInRt", "验证通过");
                 session.setAttribute("userInfo", userInfo);
                 return "redirect:../user/Homepage.jsp";
             } else {
-                session.setAttribute("signInRt", "密码错误");
+                model.addAttribute("signInRt", "密码错误");
                 break;
             }
         } while (false);
@@ -94,7 +94,7 @@ public class UserCtl {
     }
 
     @SuppressWarnings({ "deprecation" })
-    private Integer totalPrice(List<UseResources> Records, Integer tactics) {
+    private double totalPrice(List<UseResources> Records, Integer tactics) {
         Integer[] price = getPriceByTactics(tactics);
         // Integer j = 0;
         // for(Integer i:price) {
@@ -105,7 +105,8 @@ public class UserCtl {
         // System.out.println(Record.toString());
         // }
         UseResources lastRecord = null;
-        Integer totalPrice = 0;
+        double totalPrice = 0;
+        double eachHourUsed = 0;
         int hour = 0;
         long off = 0;
         for (UseResources Record : Records) {
@@ -116,9 +117,12 @@ public class UserCtl {
                 continue;
             }
             off = Record.getRcd_time().getTime() - lastRecord.getRcd_time().getTime();
+            System.out.println("This cross time used: " + (Record.getCur_used() - lastRecord.getCur_used()));
+            eachHourUsed = (double) (Record.getCur_used() - lastRecord.getCur_used()) / (double) (off / (3600 * 1000));
             for (int s = 0; s < off; s += (3600 * 1000)) {
-                totalPrice += price[hour];
-                System.out.println("Cur hour: " + hour + "\tCur price: " + price[hour] + "\tCur totalprice: " + totalPrice);
+                totalPrice += price[hour] * eachHourUsed;
+                System.out.println("Cur hour: " + hour + "\tCur used: " + eachHourUsed + "\tCur price: " + price[hour]
+                        + "\tCur totalprice: " + totalPrice);
                 // System.out.println(hour);
                 hour++;
                 if (hour == 24)
@@ -143,6 +147,8 @@ public class UserCtl {
         session.setAttribute("Records", Records);
         System.out.println("tactics 1: " + totalPrice(Records, 1));
         System.out.println("tactics 2: " + totalPrice(Records, 2));
+        session.setAttribute("tactics1", totalPrice(Records, 1));
+        session.setAttribute("tactics2", totalPrice(Records, 2));
         return "redirect:../user/Homepage.jsp";
     }
 

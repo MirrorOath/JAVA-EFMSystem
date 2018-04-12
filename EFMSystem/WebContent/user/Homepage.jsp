@@ -25,17 +25,18 @@
 
 	<c:forEach var="Record" items="${Records }" varStatus="sta">
 		<div>
-			<p>****************************************************</br>
-			Record.id:${Record.id }</br>
-			Record.rcd_time:${Record.rcd_time }</br>
-			Record.cur_used:${Record.cur_used }</br>
-			Record.user_id:${Record.user_id }</br>
-            ****************************************************</p>
+			<p>
+				****************************************************</br>
+				Record.id:${Record.id }</br> Record.rcd_time:${Record.rcd_time }</br>
+				Record.cur_used:${Record.cur_used }</br> Record.user_id:${Record.user_id }</br>
+				****************************************************
+			</p>
 		</div>
 	</c:forEach>
 
 	<div>
-		userInfo:</br> id:${userInfo.id }</br> user_name:${userInfo.user_name }</br>
+		计费方式1(谷峰计费)费用:${tactics1 }</br> 计费方式2(普通计费)费用:${tactics2 }</br> userInfo:</br>
+		id:${userInfo.id }</br> user_name:${userInfo.user_name }</br>
 		user_id:${userInfo.user_id }</br> password:${userInfo.password }</br>
 		age:${userInfo.age }</br> address:${userInfo.address }</br> role:${userInfo.role }</br>
 		tactics:${userInfo.tactics }</br>
