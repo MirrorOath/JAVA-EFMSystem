@@ -29,13 +29,10 @@ public class UserCtl {
     private BillingStrategyDao BilSDao;
 
     @RequestMapping(value = "register")
-    public String register(Model model, HttpSession session, String user_name, String password) {
+    public String register(Model model, HttpSession session, UserInfo userInfo) {
         System.out.println("/user/register.action");
-        System.out.println("user_name:" + user_name + "\r\npassword:" + password);
+        System.out.println("user_name:" + userInfo.getUser_name() + "\r\npassword:" + userInfo.getPassword());
 
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUser_name(user_name);
-        userInfo.setPassword(password);
         if (userDao.register(userInfo))
             session.setAttribute("registerRt", "注册成功");
         else
