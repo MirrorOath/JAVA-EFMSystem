@@ -13,36 +13,12 @@
 	rel="stylesheet" media="screen">
 
 </head>
+
 <body>
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-	signInRt:${signInRt }
-	</br>
-
-	<a href="${pageContext.request.contextPath }/user/searchRecords.action">searchRecords</a>
-	</br>
-
-	<c:forEach var="Record" items="${Records }" varStatus="sta">
-		<div>
-			<p>
-				****************************************************</br>
-				Record.id:${Record.id }</br> Record.rcd_time:${Record.rcd_time }</br>
-				Record.cur_used:${Record.cur_used }</br> Record.user_id:${Record.user_id }</br>
-				****************************************************
-			</p>
-		</div>
-	</c:forEach>
-
-	<div>
-		计费方式1(谷峰计费)费用:${tactics1 }</br> 计费方式2(普通计费)费用:${tactics2 }</br> userInfo:</br>
-		id:${userInfo.id }</br> user_name:${userInfo.user_name }</br>
-		user_id:${userInfo.user_id }</br> password:${userInfo.password }</br>
-		age:${userInfo.age }</br> address:${userInfo.address }</br> role:${userInfo.role }</br>
-		tactics:${userInfo.tactics }</br>
-	</div>
-	
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-2 column">
@@ -50,67 +26,76 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#panel-862198" href="#panel-element-803306">Collapsible
-								Group Item #1</a>
+								data-parent="#panel-862198" href="#panel-element-803306">账单</a>
 						</div>
 						<div id="panel-element-803306" class="panel-collapse collapse">
-							<div class="panel-body">Anim pariatur cliche...</div>
+							<div class="panel-body">
+								<a
+									href="${pageContext.request.contextPath }/user/searchRecords.action">预算计费</a>
+							</div>
 						</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#panel-862198" href="#panel-element-471267">Collapsible
-								Group Item #2</a>
+								data-parent="#panel-862198" href="#panel-element-471267">个人信息</a>
 						</div>
 						<div id="panel-element-471267" class="panel-collapse collapse">
-							<div class="panel-body">Anim pariatur cliche...</div>
+							<div class="panel-body">修改个人信息</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 column">
 				<div class="jumbotron">
-					<h1>Hello, world!</h1>
-					<p>This is a template for a simple marketing or informational
-						website. It includes a large callout called the hero unit and
-						three supporting pieces of content. Use it as a starting point to
-						create something more unique.</p>
-					<p>
-						<a class="btn btn-primary btn-large" href="#">Learn more</a>
-					</p>
+
+					<h4>
+						计费方式1(谷峰计费)费用:${tactics1 }</br> 计费方式2(普通计费)费用:${tactics2 }</br>
+					</h4>
+
+					<div>
+						<table class="table">
+							<thead>
+								<tr>
+									<!-- <th>Record.id</th> -->
+									<th>抄表时间</th>
+									<th>抄表值/度电</th>
+									<!-- <th>Record.user_id</th> -->
+								</tr>
+							</thead>
+							<c:forEach var="Record" items="${Records }" varStatus="sta">
+								<tbody>
+									<c:if test="${sta.index%2==0}">
+										<tr class="success">
+									</c:if>
+									<c:if test="${sta.index%2==1}">
+										<tr class="info">
+									</c:if>
+									<!-- <td>${Record.id }</td> -->
+									<td>${Record.rcd_time }</td>
+									<td>${Record.cur_used }</td>
+									<!-- <td>${Record.user_id }</td> -->
+									</tr>
+								</tbody>
+							</c:forEach>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 column">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.</p>
-				<p>
-					<a class="btn" href="#">View details »</a>
-				</p>
-				<form role="form">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label><input
-							type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label><input
-							type="password" class="form-control" id="exampleInputPassword1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputFile">File input</label><input type="file"
-							id="exampleInputFile" />
-						<p class="help-block">Example block-level help text here.</p>
-					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" />Check me out</label>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+
+				<div>
+					<h2>userInfo</h2>
+					<p>
+						id:${userInfo.id }</br> user_name:${userInfo.user_name }</br>
+						user_id:${userInfo.user_id }</br> password:${userInfo.password }</br>
+						age:${userInfo.age }</br> address:${userInfo.address }</br>
+						role:${userInfo.role }</br> tactics:${userInfo.tactics }</br>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
+
 </html>

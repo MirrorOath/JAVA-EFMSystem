@@ -18,8 +18,8 @@
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-    <a href="${pageContext.request.contextPath }/admin/getAllUsers.action">searchRecords</a>
-    </br>
+	<a href="${pageContext.request.contextPath }/admin/getAllUsers.action">searchRecords</a>
+	</br>
 
 	<div class="container">
 		<div class="row clearfix">
@@ -63,47 +63,22 @@
 					</thead>
 					<tbody>
 						<c:forEach var="user" items="${users }" varStatus="sta">
-							<tr class="success">
-								<td>${user.id }</td>
-								<td>${user.user_name }</td>
-								<td>${user.user_id }</td>
-								<td>${user.password }</td>
-								<td>${user.age }</td>
-								<td>${user.address }</td>
-								<td>${user.role }</td>
-								<td>${user.tactics }</td>
+							<c:if test="${sta.index%2==0}">
+								<tr class="success">
+							</c:if>
+							<c:if test="${sta.index%2==1}">
+								<tr class="info">
+							</c:if>
+							<td>${user.id }</td>
+							<td>${user.user_name }</td>
+							<td>${user.user_id }</td>
+							<td>${user.password }</td>
+							<td>${user.age }</td>
+							<td>${user.address }</td>
+							<td>${user.role }</td>
+							<td>${user.tactics }</td>
 							</tr>
 						</c:forEach>
-						<!-- 						<tr>
-							<td>1</td>
-							<td>TB - Monthly</td>
-							<td>01/04/2012</td>
-							<td>Default</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>TB - Monthly</td>
-							<td>01/04/2012</td>
-							<td>Approved</td>
-						</tr>
-						<tr class="error">
-							<td>2</td>
-							<td>TB - Monthly</td>
-							<td>02/04/2012</td>
-							<td>Declined</td>
-						</tr>
-						<tr class="warning">
-							<td>3</td>
-							<td>TB - Monthly</td>
-							<td>03/04/2012</td>
-							<td>Pending</td>
-						</tr>
-						<tr class="info">
-							<td>4</td>
-							<td>TB - Monthly</td>
-							<td>04/04/2012</td>
-							<td>Call in to confirm</td>
-						</tr> -->
 					</tbody>
 				</table>
 			</div>

@@ -50,7 +50,7 @@ public class UserCtl {
                 break;
             }
             if (userInfo.getPassword().equals(password)) {
-                session.setAttribute("signInRt", "验证通过");
+//                session.setAttribute("signInRt", "验证通过");
                 session.setAttribute("userInfo", userInfo);
                 return "redirect:../user/Homepage.jsp";
             } else {
