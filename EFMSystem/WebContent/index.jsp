@@ -33,13 +33,10 @@
                             session.removeAttribute("signInRt");
 					    }
 					%>
-					<h1>Hello, world!</h1>
-					<p>This is a template for a simple marketing or informational
-						website. It includes a large callout called the hero unit and
-						three supporting pieces of content. Use it as a starting point to
-						create something more unique.</p>
+					<h2><b>与非门电费收费管理系统</b></h2>
+					<p>在此处</br>选择更优的计费方式</br>事实查询您的扣费情况</br>你可以获取您的最新抄表记录</p>
 					<p>
-						<a class="btn btn-primary btn-large" href="#">Learn more</a>
+						<a class="btn btn-primary btn-large" href="#">了解更多</a>
 					</p>
 				</div>
 			</div>

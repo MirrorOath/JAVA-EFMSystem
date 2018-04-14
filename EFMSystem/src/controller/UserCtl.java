@@ -52,7 +52,9 @@ public class UserCtl {
             if (userInfo.getPassword().equals(password)) {
 //                session.setAttribute("signInRt", "验证通过");
                 session.setAttribute("userInfo", userInfo);
-                return "redirect:../user/Homepage.jsp";
+                if(userInfo.getRole() == 0)
+                    return "redirect:../admin/Homepage.jsp";
+                return searchRecords(model, session);
             } else {
                 session.setAttribute("signInRt", "密码错误");
                 break;
@@ -138,6 +140,7 @@ public class UserCtl {
             return "redirect:../index.jsp";
         session.removeAttribute("Records");
         List<UseResources> Records = URDao.getRecordsByUserId(userInfo.getId());
+        if(Records.isEmpty()) return "redirect:../user/Homepage.jsp";
         for (UseResources i : Records) {
             System.out.println(i.toString());
         }
@@ -147,6 +150,16 @@ public class UserCtl {
         session.setAttribute("tactics1", totalPrice(Records, 1));
         session.setAttribute("tactics2", totalPrice(Records, 2));
         return "redirect:../user/Homepage.jsp";
+    }
+    
+    @RequestMapping(value = "updateUserInfo")
+    public String updateUserInfo(Model model, HttpSession session, UserInfo userInfo) {
+        UserInfo oldUserInfo = userDao.getUserByName(userInfo.getUser_name());
+        if(oldUserInfo == null || !oldUserInfo.getPassword().equals(userInfo.getPassword())) {
+            return "redirect:../userHomepage.jsp";
+        }
+        userDao.update(oldUserInfo.getId(), userInfo);
+        return signIn(model, session, userInfo.getUser_name(), userInfo.getPassword());
     }
 
 }

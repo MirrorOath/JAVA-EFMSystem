@@ -90,9 +90,21 @@ public class UserInfoDao {
         return false;
     }
 
-    // 基于用户id更新一个用户的信息
-    public boolean update(Integer user_id, UserInfo userInfo) {
-        return false;
+    // 基于id更新一个用户的信息
+    public boolean update(Integer id, UserInfo userInfo) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+        
+        UserInfo ui = (UserInfo)session.get(UserInfo.class, id);
+        ui.setUser_id(userInfo.getUser_id());
+        ui.setPassword(userInfo.getPassword());
+        ui.setAge(userInfo.getAge());
+        ui.setAddress(userInfo.getAddress());
+        ui.setTactics(userInfo.getTactics());
+        
+        tx.commit();
+        session.close();
+        return true;
     }
 
     // 基于用户id修改用户密码

@@ -4,13 +4,22 @@ public class UserInfo {
 	private Integer id;
 	private String user_name;
 	private Integer user_id;
+	private String OldPassword;
 	private String password;
 	private Integer age;
 	private String address;
 	private Integer role;
 	private Integer tactics;
 
-	public Integer getId() {
+	public String getOldPassword() {
+        return OldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        OldPassword = oldPassword;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 
