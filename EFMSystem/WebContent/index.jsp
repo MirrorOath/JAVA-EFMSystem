@@ -26,15 +26,19 @@
 					<%
 					    if (session.getAttribute("registerRt") != null) {
 					        out.println("registerRt:" + session.getAttribute("registerRt") + "</br>");
-                            session.removeAttribute("registerRt");
+					        session.removeAttribute("registerRt");
 					    }
 					    if (session.getAttribute("signInRt") != null) {
 					        out.println("signInRt:" + session.getAttribute("signInRt") + "</br>");
-                            session.removeAttribute("signInRt");
+					        session.removeAttribute("signInRt");
 					    }
 					%>
-					<h2><b>与非门电费收费管理系统</b></h2>
-					<p>在此处</br>选择更优的计费方式</br>事实查询您的扣费情况</br>你可以获取您的最新抄表记录</p>
+					<h2>
+						<b>与非门电费收费管理系统</b>
+					</h2>
+					<p>
+						在此处</br>选择更优的计费方式</br>事实查询您的扣费情况</br>你可以获取您的最新抄表记录
+					</p>
 					<p>
 						<a class="btn btn-primary btn-large" href="#">了解更多</a>
 					</p>
