@@ -1,11 +1,13 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class UserInfoDao {
@@ -60,8 +62,14 @@ public class UserInfoDao {
     }
 
     // 根据用户id删除一个用户
-    public boolean delByUserID(Integer user_id) {
-        return false;
+    public void delUser(Integer userId) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+        
+        session.delete(getUserByID(userId));
+
+        tx.commit();
+        session.close();
     }
 
     // 注册一个新的用户
@@ -73,6 +81,7 @@ public class UserInfoDao {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
+        userInfo.setDate(new Date());
         session.save(userInfo);
         
         tx.commit();

@@ -63,7 +63,13 @@ public class AdminCtl {
     public String getAllUsers(Model model, HttpSession session) {
         List<UserInfo> usersInfo = userDao.users();
         session.setAttribute("users", usersInfo);
-        return "redirect:../admin/Homepage.jsp";
+        return "redirect:../admin/userInfo.jsp";
+    }
+    
+    @RequestMapping(value = "delUser")
+    public String delUser(Model model, HttpSession session, Integer userId) {
+        userDao.delUser(userId);
+        return getAllUsers(model, session);
     }
     
 

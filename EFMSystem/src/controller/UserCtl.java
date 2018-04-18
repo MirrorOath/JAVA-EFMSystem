@@ -33,9 +33,10 @@ public class UserCtl {
         System.out.println("/user/register.action");
         System.out.println("user_name:" + userInfo.getUser_name() + "\r\npassword:" + userInfo.getPassword());
 
-        if (userDao.register(userInfo))
-            session.setAttribute("registerRt", "注册成功");
-        else
+        if (userDao.register(userInfo)) {
+            // session.setAttribute("registerRt", "注册成功");
+            return "redirect:../user/registerSuccess.jsp";
+        } else
             session.setAttribute("registerRt", "注册失败");
 
         return "redirect:../index.jsp";
@@ -50,10 +51,10 @@ public class UserCtl {
                 break;
             }
             if (userInfo.getPassword().equals(password)) {
-//                session.setAttribute("signInRt", "验证通过");
                 session.setAttribute("userInfo", userInfo);
-                if(userInfo.getRole() == 0)
-                    return "redirect:../admin/Homepage.jsp";
+                session.setAttribute("unameNext", "退出登录");
+                if ("admin".equals(user_name))
+                    return "redirect:../admin/control.jsp";
                 return searchRecords(model, session);
             } else {
                 session.setAttribute("signInRt", "密码错误");
@@ -140,7 +141,11 @@ public class UserCtl {
             return "redirect:../index.jsp";
         session.removeAttribute("Records");
         List<UseResources> Records = URDao.getRecordsByUserId(userInfo.getId());
-        if(Records.isEmpty()) return "redirect:../user/Homepage.jsp";
+        if (Records.isEmpty())
+            return "redirect:../user/Homepage.jsp";
+        for (UseResources Record : Records) {
+            
+        }
         for (UseResources i : Records) {
             System.out.println(i.toString());
         }
@@ -151,15 +156,46 @@ public class UserCtl {
         session.setAttribute("tactics2", totalPrice(Records, 2));
         return "redirect:../user/Homepage.jsp";
     }
-    
+
     @RequestMapping(value = "updateUserInfo")
     public String updateUserInfo(Model model, HttpSession session, UserInfo userInfo) {
         UserInfo oldUserInfo = userDao.getUserByName(userInfo.getUser_name());
-        if(oldUserInfo == null || !oldUserInfo.getPassword().equals(userInfo.getPassword())) {
-            return "redirect:../userHomepage.jsp";
+        if (oldUserInfo == null || !oldUserInfo.getPassword().equals(userInfo.getPassword())) {
+            return "redirect:../user/Homepage.jsp";
         }
         userDao.update(oldUserInfo.getId(), userInfo);
         return signIn(model, session, userInfo.getUser_name(), userInfo.getPassword());
+    }
+
+    @RequestMapping(value = "rg_lg_do")
+    public String rg_lg_do(Model model, HttpSession session, String rorl) {
+        // 登录状态
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        if (userInfo != null) {
+            session.setAttribute("unameNext", "退出登录");
+            // 点击用户名
+            if ("login".equals(rorl)) {
+                if ("admin".equals(userInfo.getUser_name()))
+                    return "redirect:../admin/control.jsp";
+                return "redirect:../user/Homepage.jsp";
+            }
+            // 点击退出登录
+            else if ("register".equals(rorl)) {
+                session.removeAttribute("userInfo");
+                return "redirect:../user/login.jsp";
+            } else
+                return "redirect:../index.jsp";
+        }
+        // 非登录状态
+        else {
+            if ("register".equals(rorl))
+                return "redirect:../user/register.jsp";
+            else if ("login".equals(rorl)) {
+                session.setAttribute("lastUrl", "redirect:../index.jsp");
+                return "redirect:../user/login.jsp";
+            } else
+                return "redirect:../index.jsp";
+        }
     }
 
 }

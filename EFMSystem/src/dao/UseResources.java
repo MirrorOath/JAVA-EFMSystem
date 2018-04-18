@@ -3,20 +3,21 @@ package dao;
 import java.util.Date;
 
 public class UseResources {
-	private Integer id;
+    private Integer id;
     private Date rcd_time;
-	private Integer cur_used;
-	private Integer user_id;
+    private Integer cur_used;
+    private Integer user_id;
+    private Integer cost;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Date getRcd_time() {
+    public Date getRcd_time() {
         return rcd_time;
     }
 
@@ -25,24 +26,32 @@ public class UseResources {
     }
 
     public Integer getCur_used() {
-		return cur_used;
-	}
+        return cur_used;
+    }
 
-	public void setCur_used(Integer cur_used) {
-		this.cur_used = cur_used;
-	}
+    public void setCur_used(Integer cur_used) {
+        this.cur_used = cur_used;
+    }
 
-	public Integer getUser_id() {
-		return user_id;
-	}
+    public Integer getUser_id() {
+        return user_id;
+    }
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
 
-	@Override
-	public String toString() {
-		return "UseResources [id=" + id + ", rcd_time=" + rcd_time + ", cur_used=" + cur_used + ", user_id=" + user_id
-				+ "]";
-	}
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "UseResources [id=" + id + ", rcd_time=" + rcd_time + ", cur_used=" + cur_used + ", user_id=" + user_id
+                + "]";
+    }
 }

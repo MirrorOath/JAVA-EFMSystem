@@ -13,5 +13,6 @@
         <property name="address" column="address" type="string" />
         <property name="role" column="role" />
         <property name="tactics" column="tactics" />
+        <property name="date" column="date" type="timestamp" />
     </class>
 </hibernate-mapping>
