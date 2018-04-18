@@ -7,7 +7,7 @@ public class UseResources {
     private Date rcd_time;
     private Integer cur_used;
     private Integer user_id;
-    private Integer cost;
+    private Double cost;
 
     public Integer getId() {
         return id;
@@ -41,11 +41,11 @@ public class UseResources {
         this.user_id = user_id;
     }
 
-    public Integer getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 

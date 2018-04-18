@@ -95,6 +95,8 @@ public class UserCtl {
 
     @SuppressWarnings({ "deprecation" })
     private double totalPrice(List<UseResources> Records, Integer tactics) {
+        if (tactics == null || tactics == 0)
+            return 0;
         Integer[] price = getPriceByTactics(tactics);
         // Integer j = 0;
         // for(Integer i:price) {
@@ -121,6 +123,7 @@ public class UserCtl {
             eachHourUsed = (double) (Record.getCur_used() - lastRecord.getCur_used()) / (double) (off / (3600 * 1000));
             for (int s = 0; s < off; s += (3600 * 1000)) {
                 totalPrice += price[hour] * eachHourUsed;
+                // totalPrice += curPrice;
                 System.out.println("Cur hour: " + hour + "\tCur used: " + eachHourUsed + "\tCur price: " + price[hour]
                         + "\tCur totalprice: " + totalPrice);
                 // System.out.println(hour);
@@ -128,6 +131,7 @@ public class UserCtl {
                 if (hour == 24)
                     hour = 0;
             }
+            Record.setCost(totalPrice);
             // System.out.println(off / (3600 * 1000));
             lastRecord = Record;
         }
@@ -143,17 +147,15 @@ public class UserCtl {
         List<UseResources> Records = URDao.getRecordsByUserId(userInfo.getId());
         if (Records.isEmpty())
             return "redirect:../user/Homepage.jsp";
-        for (UseResources Record : Records) {
-            
-        }
         for (UseResources i : Records) {
             System.out.println(i.toString());
         }
         session.setAttribute("Records", Records);
-        System.out.println("tactics 1: " + totalPrice(Records, 1));
-        System.out.println("tactics 2: " + totalPrice(Records, 2));
+//        System.out.println("tactics 1: " + totalPrice(Records, 1));
+//        System.out.println("tactics 2: " + totalPrice(Records, 2));
         session.setAttribute("tactics1", totalPrice(Records, 1));
         session.setAttribute("tactics2", totalPrice(Records, 2));
+        totalPrice(Records, userInfo.getTactics());
         return "redirect:../user/Homepage.jsp";
     }
 
