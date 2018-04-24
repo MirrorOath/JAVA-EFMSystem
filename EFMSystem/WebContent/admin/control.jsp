@@ -12,8 +12,8 @@
 				<ul>
 				<li class="selected"></li>
 				<li><a href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
-				<li><a href="${pageContext.request.contextPath }/admin/getAllUsers.action">管理用户</a></li>
-                <li><a href="${pageContext.request.contextPath }/admin/CopyMeter.jsp">抄电表</a></li>
+				<li><a href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
+                <li><a href="${pageContext.request.contextPath }/admin/meter.jsp">管理抄表记录</a></li>
 				<li></li>
 				</ul>
 	</div>
