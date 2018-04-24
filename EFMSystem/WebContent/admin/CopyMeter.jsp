@@ -47,6 +47,7 @@
 						<div class="col-sm-10">
 							<input name="dateStr" class="form-control" type="text"
 								required="true" />
+                        <p class="help-block">日期格式请参照yyyy-MM-dd HH:mm:ss</p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -72,7 +73,7 @@
 		</div>
 	</div>
 	<div>
-		copyMeterRt:${copyMeterRt }</br>
+		
 	</div>
 
 </body>

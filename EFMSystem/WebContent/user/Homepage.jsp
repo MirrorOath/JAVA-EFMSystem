@@ -73,7 +73,7 @@
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-2 column">
-				<form role="form">
+<!-- 				<form role="form">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label><input
 							type="email" class="form-control" id="exampleInputEmail1" />
@@ -91,7 +91,7 @@
 						<label><input type="checkbox" />Check me out</label>
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+				</form> -->
 			</div>
 			<div class="col-md-6 column">
 
