@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-	xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -15,33 +14,19 @@
 	 http://www.springframework.org/schema/aop
 	 http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 	 ">
-	 
-	 <context:component-scan base-package="controller"/>
-	 <context:component-scan base-package="dao"/>
-	 <context:component-scan base-package="service"/>
-<!-- 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/User/" />
-		<property name="suffix" value=".jsp" />
-	 </bean> -->
-	 <mvc:annotation-driven></mvc:annotation-driven>
-	 
-	<!-- <bean id="aop" class="service.Aop"/>
-	<aop:config>
-       <aop:pointcut expression="execution(* controller.*.*(..))" id="pt"/>
-     	切面：所有关注点 ,即aop对象中的所有方法
-       <aop:aspect ref="aop">
-       	  <aop:before method="begin" pointcut-ref="pt"/>
-          <aop:after method="after" pointcut-ref="pt"/>
-           <aop:around method="around" pointcut-ref="pt"/>
-       </aop:aspect>
-    </aop:config> -->
-<!--     <mvc:interceptors> 	// 拦截请求过滤器
-		<bean class="service.LoginInterceptor"/>第一种配置：拦截所有请求
-		<mvc:interceptor>
-			<mvc:mapping path="/user/*"/>
-			<mvc:mapping path="/cart/*"/>
-			<mvc:mapping path="/order/*"/>
-			<bean class="service.LoginInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors> -->
+
+	<context:component-scan
+		base-package="controller" />
+	<context:component-scan base-package="dao" />
+	<context:component-scan base-package="service" />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="objectMapper" ref="customObjectMapper"></property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<bean id="customObjectMapper" class="service.CustomObjectMapper"></bean>
+
 </beans>

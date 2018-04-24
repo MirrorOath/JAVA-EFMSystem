@@ -18,62 +18,59 @@
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    
-    <jsp:include page="util.jsp" />
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <nav class="navbar navbar-default" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span><span
-                            class="icon-bar"></span><span class="icon-bar"></span><span
-                            class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand"
-                        href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a>
-                </div>
-                <div class="collapse navbar-collapse"
-                    id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a
-                            href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.user_name }</a>
-                        </li>
-                        <li><a
-                            href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
-                        </li>
-                        <li><a
-                            href="${pageContext.request.contextPath }/user/more.jsp">更多</a></li>
-                        <li><a
-                            href="${pageContext.request.contextPath }/user/aboutUs.jsp">关于我们</a>
-                        </li>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle"
-                            data-toggle="dropdown">更多<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li><a
-                                    href="#"
-                                    target=_blank>查看个人信息</a></li>
-                            </ul></li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search"
-                        action="#"
-                        method="post">
-                        <div class="form-group">
-                            <input class="form-control" type="text" maxlenght=100
-                                name="commodityName" />
-                        </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
-                    </form>
-                </div>
-                </nav>
-            </div>
-        </div>
-    </div>
+
+	<jsp:include page="util.jsp" />
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span><span
+							class="icon-bar"></span><span class="icon-bar"></span><span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand"
+						href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a>
+				</div>
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a
+							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.user_name }</a>
+						</li>
+						<li><a
+							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
+						</li>
+						<li><a
+							href="${pageContext.request.contextPath }/user/more.jsp">更多</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/user/aboutUs.jsp">关于我们</a>
+						</li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">更多<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" target=_blank>查看个人信息</a></li>
+							</ul></li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search" action="#"
+						method="post">
+						<div class="form-group">
+							<input class="form-control" type="text" maxlenght=100
+								name="commodityName" />
+						</div>
+						<button type="submit" class="btn btn-default">搜索</button>
+					</form>
+				</div>
+				</nav>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-2 column">
-<!-- 				<form role="form">
+				<!-- 				<form role="form">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label><input
 							type="email" class="form-control" id="exampleInputEmail1" />
@@ -111,7 +108,7 @@
 								<!-- <th>Record.id</th> -->
 								<th>抄表时间</th>
 								<th>抄表值/度电</th>
-                                <th>电费使用量</th>
+								<th>电费使用量</th>
 								<!-- <th>Record.user_id</th> -->
 							</tr>
 						</thead>
@@ -126,7 +123,7 @@
 								<!-- <td>${Record.id }</td> -->
 								<td>${Record.rcd_time }</td>
 								<td>${Record.cur_used }</td>
-                                <td>${Record.cost }</td>
+								<td>${Record.cost }</td>
 								<!-- <td>${Record.user_id }</td> -->
 								</tr>
 							</tbody>
@@ -190,15 +187,6 @@
 							</div>
 						</div>
 					</form>
-					<%-- <p> --%>
-					<%-- id:${userInfo.id }</br>  --%>
-					<%-- 用户名:${userInfo.user_name }</br> --%>
-					<%-- user_id:${userInfo.user_id }</br>  --%>
-					<%-- password:${userInfo.password }</br> --%>
-					<%-- 年龄:${userInfo.age }</br> 地址:${userInfo.address }</br> --%>
-					<%-- role:${userInfo.role }</br> --%>
-					<%-- 计费方式:${userInfo.tactics }</br> --%>
-					<%-- </p> --%>
 				</div>
 			</div>
 		</div>

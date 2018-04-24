@@ -12,7 +12,7 @@
 	rel="stylesheet" media="screen">
 
 </head>
-<body>
+<body background="image/1.jpg" style="background-size:cover" >
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
@@ -83,7 +83,7 @@
 					    }
 					%>
 					<h2>
-						<b>与非门电费收费管理系统</b>
+						<b>居民电费缴费管理系统</b>
 					</h2>
 					<p>
 						在此处</br>选择更优的计费方式</br>事实查询您的扣费情况</br>你可以获取您的最新抄表记录
@@ -97,7 +97,8 @@
 				<div class="tabbable" id="tabs-421777">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#panel-836193" data-toggle="tab">注册</a></li>
-						<li><a href="#panel-312880" data-toggle="tab">登录</a></li>
+						<li><a href="#panel-312880" data-toggle="tab">用户登录登录</a></li>
+                        <li><a href="#panel-312881" data-toggle="tab">管理员登录</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="panel-836193">
@@ -152,6 +153,32 @@
 								</div>
 							</form>
 						</div>
+                        <div class="tab-pane" id="panel-312881">
+                            <form class="form-horizontal" role="form"
+                                action="${pageContext.request.contextPath}/user/adminSignIn.action"
+                                method="post">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
+                                    <div class="col-sm-10">
+                                        <input name="user_name"
+                                            class="easyui-validatebox form-control" type="text"
+                                            required="true" validType="userName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+                                    <div class="col-sm-10">
+                                        <input name="password" class="form-control" type="password"
+                                            required="true" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">管理员登录</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 					</div>
 				</div>
 			</div>

@@ -11,7 +11,7 @@
 	rel="stylesheet" media="screen">
 
 </head>
-<body>
+<body background="../image/1.jpg" style="background-size:cover" >
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
@@ -20,50 +20,47 @@
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-				<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span><span
-							class="icon-bar"></span><span class="icon-bar"></span><span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand"
-						href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a>
-				</div>
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a
-							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.userName }</a>
-						</li>
-						<li><a
-							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
-						</li>
-						<li><a
-							href="${pageContext.request.contextPath }/user/more.jsp">更多</a></li>
-						<li><a
-							href="${pageContext.request.contextPath }/user/aboutUs.jsp">关于我们</a>
-						</li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">更多<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li><a
-									href="${pageContext.request.contextPath}/cart/seeCart.action"
-									target=_blank>查看购物车</a></li>
-							</ul></li>
-					</ul>
-					<form class="navbar-form navbar-left" role="search"
-						action="${pageContext.request.contextPath}/cmty/searchByName.action"
-						method="post">
-						<div class="form-group">
-							<input class="form-control" type="text" maxlenght=100
-								name="commodityName" />
-						</div>
-						<button type="submit" class="btn btn-default">搜索</button>
-					</form>
-				</div>
-				</nav>
+                <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span><span
+                            class="icon-bar"></span><span class="icon-bar"></span><span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"
+                        href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a>
+                </div>
+                <div class="collapse navbar-collapse"
+                    id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a
+                            href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.user_name }</a>
+                        </li>
+                        <li><a
+                            href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
+                        </li>
+                        <li><a
+                            href="${pageContext.request.contextPath }/user/more.jsp">更多</a></li>
+                        <li><a
+                            href="${pageContext.request.contextPath }/user/aboutUs.jsp">关于我们</a>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">更多<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" target=_blank>查看个人信息</a></li>
+                            </ul></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search" action="#"
+                        method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" maxlenght=100
+                                name="commodityName" />
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                </div>
+                </nav>
 			</div>
 		</div>
 	</div>

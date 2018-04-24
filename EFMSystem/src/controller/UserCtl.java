@@ -51,11 +51,33 @@ public class UserCtl {
                 break;
             }
             if (userInfo.getPassword().equals(password)) {
+                if ("admin".equals(user_name))
+                    return "redirect:../index.jsp";
                 session.setAttribute("userInfo", userInfo);
                 session.setAttribute("unameNext", "退出登录");
-                if ("admin".equals(user_name))
-                    return "redirect:../admin/control.jsp";
                 return searchRecords(model, session);
+            } else {
+                session.setAttribute("signInRt", "密码错误");
+                break;
+            }
+        } while (false);
+        return "redirect:../index.jsp";
+    }
+    
+    @RequestMapping(value = "adminSignIn")
+    public String adminSignIn(Model model, HttpSession session, String user_name, String password) {
+        UserInfo userInfo = userDao.getUserByName(user_name);
+        do {
+            if (userInfo == null) {
+                session.setAttribute("signInRt", "用户不存在");
+                break;
+            }
+            if (userInfo.getPassword().equals(password)) {
+                if (!"admin".equals(user_name))
+                    return "redirect:../index.jsp";
+                session.setAttribute("userInfo", userInfo);
+                session.setAttribute("unameNext", "退出登录");
+                return "redirect:../admin/control.jsp";
             } else {
                 session.setAttribute("signInRt", "密码错误");
                 break;
