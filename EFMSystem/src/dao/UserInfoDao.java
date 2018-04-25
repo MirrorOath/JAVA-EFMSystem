@@ -73,10 +73,10 @@ public class UserInfoDao {
     }
 
     // 注册一个新的用户
-    public boolean register(UserInfo userInfo) {
+    public UserInfo register(UserInfo userInfo) {
         // 如果按用户名查询有结果,则返回false,注册失败
         if(getUserByName(userInfo.getUser_name()) != null)
-            return false;
+            return null;
 
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
@@ -86,7 +86,7 @@ public class UserInfoDao {
         
         tx.commit();
         session.close();
-        return true;
+        return userInfo;
     }
 
     // 更新一个用户的信息
@@ -100,12 +100,13 @@ public class UserInfoDao {
     }
 
     // 基于id更新一个用户的信息
-    public boolean update(Integer id, UserInfo userInfo) {
+    public UserInfo update(Integer id, UserInfo userInfo) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
         UserInfo ui = (UserInfo)session.get(UserInfo.class, id);
         ui.setUser_id(userInfo.getUser_id());
+        ui.setUser_name(userInfo.getUser_name());
         ui.setPassword(userInfo.getPassword());
         ui.setAge(userInfo.getAge());
         ui.setAddress(userInfo.getAddress());
@@ -113,7 +114,7 @@ public class UserInfoDao {
         
         tx.commit();
         session.close();
-        return true;
+        return ui;
     }
 
     // 基于用户id修改用户密码

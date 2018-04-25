@@ -18,6 +18,8 @@
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script
+        src="${pageContext.request.contextPath }/js/Homepage.js"></script>
 
 	<jsp:include page="util.jsp" />
 	<div class="container">
@@ -69,67 +71,74 @@
 	</div>
 	<div class="container">
 		<div class="row clearfix">
-			<div class="col-md-2 column">
-				<!-- 				<form role="form">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label><input
-							type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label><input
-							type="password" class="form-control" id="exampleInputPassword1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputFile">File input</label><input type="file"
-							id="exampleInputFile" />
-						<p class="help-block">Example block-level helpa text here.</p>
-					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" />Check me out</label>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form> -->
-			</div>
-			<div class="col-md-6 column">
+			<div class="col-md-8 column">
 
-				<div>
-					<p>
-						<a
-							href="${pageContext.request.contextPath }/user/searchRecords.action">刷新</a>
-					</p>
+				<div class="tabbable" id="tabs-421777">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#panel-836193" data-toggle="tab">查看抄表记录</a></li>
+						<li><a href="#panel-312880" data-toggle="tab">电费核算</a></li>
+						<li><a href="#panel-312881" data-toggle="tab">缴费</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="panel-836193">
+							<div>
+								<p>
+									<a
+										href="${pageContext.request.contextPath }/user/searchRecords.action">刷新</a>
+								</p>
 
-					<h4>
-						计费方式1(谷峰计费)费用:${tactics1 }</br> 计费方式2(普通计费)费用:${tactics2 }</br>
-					</h4>
+								<p>
+									谷峰计费: 22:00--6:00 1元/度电 6:00--22:00 2元/度电 </br> 普通计费: 全天2元/度电
+								</p>
+								<h4>
+									计费方式1(谷峰计费)费用:${tactics1 }</br> 计费方式2(普通计费)费用:${tactics2 }</br>
+								</h4>
 
-					<table class="table">
-						<thead>
-							<tr>
-								<!-- <th>Record.id</th> -->
-								<th>抄表时间</th>
-								<th>抄表值/度电</th>
-								<th>电费使用量</th>
-								<!-- <th>Record.user_id</th> -->
-							</tr>
-						</thead>
-						<c:forEach var="Record" items="${Records }" varStatus="sta">
-							<tbody>
-								<c:if test="${sta.index%2==0}">
-									<tr class="success">
-								</c:if>
-								<c:if test="${sta.index%2==1}">
-									<tr class="info">
-								</c:if>
-								<!-- <td>${Record.id }</td> -->
-								<td>${Record.rcd_time }</td>
-								<td>${Record.cur_used }</td>
-								<td>${Record.cost }</td>
-								<!-- <td>${Record.user_id }</td> -->
-								</tr>
-							</tbody>
-						</c:forEach>
-					</table>
+								<table class="table">
+									<thead>
+										<tr>
+											<!-- <th>Record.id</th> -->
+											<th>抄表时间</th>
+											<th>抄表值/度电</th>
+											<!-- 			<th>电费使用量</th> -->
+											<!-- <th>Record.user_id</th> -->
+										</tr>
+									</thead>
+									<c:forEach var="Record" items="${Records }" varStatus="sta">
+										<tbody>
+											<c:if test="${sta.index%2==0}">
+												<tr class="success">
+											</c:if>
+											<c:if test="${sta.index%2==1}">
+												<tr class="info">
+											</c:if>
+											<!-- <td>${Record.id }</td> -->
+											<td>${Record.rcd_time }</td>
+											<td>${Record.cur_used }</td>
+											<%-- 		<td>${Record.cost }</td> --%>
+											<!-- <td>${Record.user_id }</td> -->
+											</tr>
+										</tbody>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane" id="panel-312880">
+							<div>
+								<p>
+									<a
+										href="javascript:getMEBill()">刷新</a>
+								</p>
+								<p id="monthP"></p>
+                                <p id="usedP"></p>
+                                <p id="tacticsP"></p>
+                                <p id="costP"></p>
+							</div>
+						</div>
+						<div class="tab-pane" id="panel-312881"></div>
+					</div>
 				</div>
+
 			</div>
 			<div class="col-md-4 column">
 

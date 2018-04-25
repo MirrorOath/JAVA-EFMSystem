@@ -10,6 +10,7 @@
         <property name="user_id" column="user_id" />
         <property name="password" column="password" type="string" />
         <property name="age" column="age" />
+        <property name="money" column="money" />
         <property name="address" column="address" type="string" />
         <property name="role" column="role" />
         <property name="tactics" column="tactics" />

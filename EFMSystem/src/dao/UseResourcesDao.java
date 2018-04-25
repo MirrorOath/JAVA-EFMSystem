@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class UseResourcesDao {
 
     // 添加一条抄表记录
-    public boolean addRecord(UseResources useResource) {
+    public UseResources addRecord(UseResources useResource) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
@@ -20,7 +20,7 @@ public class UseResourcesDao {
 
         tx.commit();
         session.close();
-        return true;
+        return useResource;
     }
     
     // 根据用户id返回所有抄表记录
@@ -36,6 +36,33 @@ public class UseResourcesDao {
         tx.commit();
         session.close();
         return Records;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<UseResources> getAllMeters(){
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+        
+        Query query = session.createQuery("from UseResources");
+        List<UseResources> Records = (List<UseResources>) query.list();
+
+        tx.commit();
+        session.close();
+        return Records;
+    }
+    
+    public UseResources update(Integer id, UseResources us) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+
+        UseResources ur = (UseResources) session.get(UseResources.class, id);
+        ur.setCur_used(us.getCur_used());
+        ur.setUser_id(us.getUser_id());
+        ur.setRcd_time(us.getRcd_time());
+        
+        tx.commit();
+        session.close();
+        return ur;
     }
     
 }

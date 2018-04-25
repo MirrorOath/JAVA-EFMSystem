@@ -9,18 +9,11 @@ public class UserInfo {
     private String OldPassword;
     private String password;
     private Integer age;
+    private Integer money;
     private String address;
     private Integer role;
     private Integer tactics;
     private Date date;
-
-    public String getOldPassword() {
-        return OldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        OldPassword = oldPassword;
-    }
 
     public Integer getId() {
         return id;
@@ -46,6 +39,14 @@ public class UserInfo {
         this.user_id = user_id;
     }
 
+    public String getOldPassword() {
+        return OldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        OldPassword = oldPassword;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -60,6 +61,14 @@ public class UserInfo {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 
     public String getAddress() {
@@ -96,7 +105,9 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo [id=" + id + ", user_name=" + user_name + ", user_id=" + user_id + ", password=" + password
-                + ", age=" + age + ", address=" + address + ", role=" + role + ", tactics=" + tactics + "]";
+        return "UserInfo [id=" + id + ", user_name=" + user_name + ", user_id=" + user_id + ", OldPassword="
+                + OldPassword + ", password=" + password + ", age=" + age + ", money=" + money + ", address=" + address
+                + ", role=" + role + ", tactics=" + tactics + ", date=" + date + "]";
     }
+
 }

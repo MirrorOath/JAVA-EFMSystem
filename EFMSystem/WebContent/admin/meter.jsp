@@ -40,10 +40,10 @@ form {
 <script type="text/javascript">
                 $(function () {
                     $('#dg').edatagrid({
-                        url: '../admin/easyUIGetUsers.action',
-                        saveUrl: '../admin/easyUISaveUser.action',
-                        updateUrl: '../admin/easyUIUpdateUser.action',
-                        destroyUrl: '../admin/easyUIDelUser.action'
+                        url: '../admin/easyUIGetMeters.action',
+                        saveUrl: '../admin/easyUISaveMeter.action',
+                        updateUrl: '../admin/easyUIUpdateMeter.action',
+                        destroyUrl: '../admin/easyUIDelMeter.action'
                     });
                 });
             </script>
@@ -52,18 +52,13 @@ form {
 
 <body>
     <div id="navigation">
-        <ul>
-            <li class="selected"></li>
-            <li><a
-                href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
-            <li><a
-                href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
-            <li><a
-                href="${pageContext.request.contextPath }/admin/cmties.jsp">管理商品</a></li>
-            <li><a
-                href="${pageContext.request.contextPath }/admin/addCmty.jsp">添加商品</a></li>
-            <li></li>
-        </ul>
+                <ul>
+                <li class="selected"></li>
+                <li><a href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
+                <li><a href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
+                <li><a href="${pageContext.request.contextPath }/admin/meter.jsp">管理抄表记录</a></li>
+                <li></li>
+                </ul>
     </div>
 
     <div>
@@ -77,15 +72,11 @@ form {
             fitColumns="true" singleSelect="true">
             <thead>
                 <tr>
-                    <th field="userName" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">用户名</th>
-                    <th field="password" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">密码</th>
-                    <th field="age" width="50" editor="text">年龄</th>
-                    <th field="address" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">地址</th>
-                    <th field="date" width="50"
-                        editor="{type:'validatebox',options:{validType:'datetime'}}">注册日期</th>
+                    <th field="user_id" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">用户id</th>
+                    <th field="cur_used" width="50" editor="text">抄表数</th>
+                    <th field="rcd_time" width="50"
+                        editor="{type:'validatebox',options:{validType:'datetime'}}">抄表时间戳</th>
                 </tr>
             </thead>
         </table>
