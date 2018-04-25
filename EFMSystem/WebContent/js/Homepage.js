@@ -19,6 +19,8 @@ function getBillings() {
                         + " class='panel-collapse collapse' >"
                         + "<div class='panel-body'>" 
                         + "用户名:   " + index.userName + "<br/>"
+                        + "计费方式:  " + (index.tactics == 2 ? "普通计费" : "谷峰计费") + "<br/>"
+                        + "当月用量:  " + index.curUsed + "<br/>"
                         + "账单费用:  " + index.cost + "<br/>"
                         + "滞纳金(每天千分之一):   " + index.exCost + "<br/>"
                         + "账单生成日期: " + index.date + "<br/>"
