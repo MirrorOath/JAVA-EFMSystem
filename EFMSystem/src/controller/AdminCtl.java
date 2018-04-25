@@ -205,13 +205,15 @@ public class AdminCtl {
     
 
     @RequestMapping(value = "getUserInfo")
-    public @ResponseBody boolean getUserInfo(Model model, HttpSession session) {
+    public @ResponseBody UserInfo getUserInfo(Model model, HttpSession session) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         if (userInfo == null)
-            return false;
+            return null;
         UserInfo ui = userDao.getUserByID(userInfo.getId());
+        session.removeAttribute("userInfo");
         session.setAttribute("userInfo", ui);
-        return true;
+        System.out.println(ui);
+        return ui;
     }
 
     private static String getStringDate(Date date) {

@@ -63,10 +63,11 @@ function pushMoney() {
         },
         dateType : "json",
         success : function(data) {
-            if (data == false)
+            if (data.id == null)
                 alert("充值失败");
-            else
+            else {
                 alert("充值成功");
+            }
         }
     })
 }

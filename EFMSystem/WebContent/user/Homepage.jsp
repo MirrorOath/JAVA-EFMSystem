@@ -161,9 +161,9 @@
                             <div>
                                 <h2>当前用户信息</h2>
                                 
-                                <p>
+<!--                                 <p>
                                     <a href="javascript:getUserInfo()">刷新</a>
-                                </p>
+                                </p> -->
                                 <form class="form-horizontal"
                                     role="form"
                                     action="${pageContext.request.contextPath}/user/updateUserInfo.action"
@@ -229,7 +229,7 @@
                                             <input name="money"
                                                 class="form-control"
                                                 type="text"
-                                                required="true"
+                                                required="true" id="lastMoney"
                                                 value="${userInfo.money }" />
                                         </div>
                                     </div>
