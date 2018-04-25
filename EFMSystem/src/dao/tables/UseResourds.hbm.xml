@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="dao" auto-import="true">
-    <class name="UseResources">
+<hibernate-mapping package="dao.tables" auto-import="true">
+    <class name="UseResourds">
         <!-- 主键 ，映射-->
         <id name="id" column="id">
             <generator class="increment"/>
         </id>
-        <property name="rcd_time" column="rcd_time" type="timestamp" />
-        <property name="cur_used" column="cur_used" />
-        <property name="user_id" column="user_id" />
+        <property name="userId" column="userId" />
+        <property name="curUsed" column="curUsed" />
+        <property name="date" column="date" type="timestamp" />
     </class>
 </hibernate-mapping>

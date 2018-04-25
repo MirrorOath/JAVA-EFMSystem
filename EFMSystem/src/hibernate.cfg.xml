@@ -25,8 +25,8 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sour
 		<property name="hibernate.cache.use_query_cache">true</property>
 		<property name="connection.useUnicode">true</property>
         <property name="connection.characterEncoding">UTF-8</property>
-        <mapping resource="dao/UserInfo.hbm.xml"/>
-        <mapping resource="dao/BillingStrategy.hbm.xml"/>
-        <mapping resource="dao/UseResources.hbm.xml"/>
+        <mapping resource="dao/tables/UserInfo.hbm.xml"/>
+        <mapping resource="dao/tables/Billing.hbm.xml"/>
+        <mapping resource="dao/tables/UseResourds.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

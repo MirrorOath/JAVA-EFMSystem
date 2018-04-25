@@ -78,13 +78,12 @@ public class UserInfoDao {
     // 注册一个新的用户
     public UserInfo register(UserInfo userInfo) {
         // 如果按用户名查询有结果,则返回false,注册失败
-        if(getUserByName(userInfo.getUser_name()) != null)
+        if(getUserByName(userInfo.getUserName()) != null)
             return null;
 
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
-        userInfo.setDate(new Date());
         userInfo.setTactics(1);
         userInfo.setMoney(0.0);
         session.save(userInfo);
@@ -105,22 +104,23 @@ public class UserInfoDao {
     }
 
     // 基于id更新一个用户的信息
-    public UserInfo update(Integer id, UserInfo userInfo) {
+    public UserInfo update(Integer id, UserInfo newUi) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
-        UserInfo ui = (UserInfo)session.get(UserInfo.class, id);
-        ui.setUser_id(userInfo.getUser_id());
-        ui.setUser_name(userInfo.getUser_name());
-        ui.setPassword(userInfo.getPassword());
-        ui.setAge(userInfo.getAge());
-        ui.setAddress(userInfo.getAddress());
-        ui.setTactics(userInfo.getTactics());
-        ui.setMoney(userInfo.getMoney());
+        UserInfo oldUi = (UserInfo)session.get(UserInfo.class, id);
+        oldUi.setUserName(newUi.getUserName());
+        oldUi.setPassword(newUi.getPassword());
+        oldUi.setAddress(newUi.getAddress());
+        oldUi.setTell(newUi.getTell());
+        oldUi.setMoney(newUi.getMoney());
+        oldUi.setRole(newUi.getRole());
+        oldUi.setTactics(newUi.getTactics());
+        oldUi.setIsUnusually(newUi.getIsUnusually());
         
         tx.commit();
         session.close();
-        return ui;
+        return oldUi;
     }
 
     // 基于用户id修改用户密码

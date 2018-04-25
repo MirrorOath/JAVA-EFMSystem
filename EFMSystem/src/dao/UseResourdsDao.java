@@ -7,15 +7,15 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import dao.tables.UseResources;
+import dao.tables.UseResourds;
 import dao.util.UtilFactory;
 
 
 @Repository
-public class UseResourcesDao {
+public class UseResourdsDao {
 
     // 添加一条抄表记录
-    public UseResources addRecord(UseResources useResource) {
+    public UseResourds addRecord(UseResourds useResource) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
@@ -28,13 +28,13 @@ public class UseResourcesDao {
     
     // 根据用户id返回所有抄表记录
     @SuppressWarnings("unchecked")
-    public List<UseResources> getRecordsByUserId(Integer user_id){
+    public List<UseResourds> getRecordsByUserId(Integer user_id){
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
         Query query = session.createQuery("from UseResources where user_id = ?");
         query.setString(0, user_id.toString());
-        List<UseResources> Records = (List<UseResources>) query.list();
+        List<UseResourds> Records = (List<UseResourds>) query.list();
         
         tx.commit();
         session.close();
@@ -42,30 +42,30 @@ public class UseResourcesDao {
     }
     
     @SuppressWarnings("unchecked")
-    public List<UseResources> getAllMeters(){
+    public List<UseResourds> getAllMeters(){
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
         Query query = session.createQuery("from UseResources");
-        List<UseResources> Records = (List<UseResources>) query.list();
+        List<UseResourds> Records = (List<UseResourds>) query.list();
 
         tx.commit();
         session.close();
         return Records;
     }
     
-    public UseResources update(Integer id, UseResources us) {
+    public UseResourds update(Integer id, UseResourds newUr) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
-        UseResources ur = (UseResources) session.get(UseResources.class, id);
-        ur.setCur_used(us.getCur_used());
-        ur.setUser_id(us.getUser_id());
-        ur.setRcd_time(us.getRcd_time());
+        UseResourds oldUr = (UseResourds) session.get(UseResourds.class, id);
+        oldUr.setCurUsed(newUr.getCurUsed());
+        oldUr.setUserId(newUr.getUserId());
+        oldUr.setDate(newUr.getDate());
         
         tx.commit();
         session.close();
-        return ur;
+        return oldUr;
     }
     
 }

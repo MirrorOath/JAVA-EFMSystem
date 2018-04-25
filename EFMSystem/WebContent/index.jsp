@@ -12,10 +12,12 @@
 	rel="stylesheet" media="screen">
 
 </head>
-<body background="image/1.jpg" style="background-size:cover" >
+<body background="image/1.jpg" style="background-size:cover" onload="conBase()" >
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
+    <script
+        src="${pageContext.request.contextPath }/js/index.js"></script>
 
     <jsp:include page="user/util.jsp" />
 	<div class="container">

@@ -20,7 +20,7 @@ import dao.tables.*;
 @RequestMapping(value = "/admin/")
 public class AdminCtl {
     @Autowired
-    private UseResourcesDao URDao;
+    private UseResourdsDao URDao;
     @Autowired
     private UserInfoDao userDao;
 
@@ -46,10 +46,10 @@ public class AdminCtl {
             System.out.println(date);
 
             System.out.println(userInfo.toString());
-            UseResources useResource = new UseResources();
-            useResource.setUser_id(userInfo.getId());
-            useResource.setRcd_time(date);
-            useResource.setCur_used(Integer.valueOf(copyNumber));
+            UseResourds useResource = new UseResourds();
+            useResource.setUserId(userInfo.getId());
+            useResource.setDate(date);
+            useResource.setCurUsed(Integer.valueOf(copyNumber));
             System.out.println(useResource.toString());
             URDao.addRecord(useResource);
             model.addAttribute("copyMeterRt", "抄表记录  录入成功");
@@ -85,10 +85,9 @@ public class AdminCtl {
             Integer age, Integer tactics, String address) {
         UserInfo us = new UserInfo();
         us.setAddress(address);
-        us.setUser_name(user_name);
+        us.setUserName(user_name);
         us.setPassword(password);
         us.setTactics(tactics);
-        us.setAge(age);
         UserInfo usersInfo = userDao.register(us);
         return usersInfo;
     }
@@ -99,9 +98,8 @@ public class AdminCtl {
         UserInfo us = new UserInfo();
         us.setId(id);
         us.setAddress(address);
-        us.setUser_name(user_name);
+        us.setUserName(user_name);
         us.setPassword(password);
-        us.setAge(age);
         us.setTactics(tactics);
         System.out.println(us.toString());
         UserInfo usersInfo = userDao.update(id, us);
@@ -115,8 +113,8 @@ public class AdminCtl {
     }
 
     @RequestMapping(value = "easyUIGetMeters")
-    public @ResponseBody List<UseResources> easyUIGetMeters(Model model, HttpSession session, UserInfo userInfo) {
-        List<UseResources> Meters = URDao.getAllMeters();
+    public @ResponseBody List<UseResourds> easyUIGetMeters(Model model, HttpSession session, UserInfo userInfo) {
+        List<UseResourds> Meters = URDao.getAllMeters();
         return Meters;
     }
     
@@ -135,26 +133,26 @@ public class AdminCtl {
     }
 
     @RequestMapping(value = "easyUISaveMeter")
-    public @ResponseBody UseResources easyUISaveMeter(Model model, HttpSession session, Integer user_id,
+    public @ResponseBody UseResourds easyUISaveMeter(Model model, HttpSession session, Integer user_id,
             Integer cur_used, String rcd_time) {
-        UseResources us = new UseResources();
-        us.setUser_id(user_id);
-        us.setCur_used(cur_used);
-        us.setRcd_time(stringToDate(rcd_time));
-        UseResources ur = URDao.addRecord(us);
+        UseResourds us = new UseResourds();
+        us.setUserId(user_id);
+        us.setCurUsed(cur_used);
+        us.setDate(stringToDate(rcd_time));
+        UseResourds ur = URDao.addRecord(us);
         return ur;
     }
 
     @RequestMapping(value = "easyUIUpdateMeter")
-    public @ResponseBody UseResources easyUIUpdateMeter(Model model, HttpSession session, Integer user_id,
+    public @ResponseBody UseResourds easyUIUpdateMeter(Model model, HttpSession session, Integer user_id,
             Integer cur_used, Integer id, String rcd_time) {
-        UseResources us = new UseResources();
+        UseResourds us = new UseResourds();
         us.setId(id);
-        us.setUser_id(user_id);
-        us.setCur_used(cur_used);
-        us.setRcd_time(stringToDate(rcd_time));
+        us.setUserId(user_id);
+        us.setCurUsed(cur_used);
+        us.setDate(stringToDate(rcd_time));
         System.out.println(us.toString());
-        UseResources ur = URDao.update(id, us);
+        UseResourds ur = URDao.update(id, us);
         return ur;
     }
 

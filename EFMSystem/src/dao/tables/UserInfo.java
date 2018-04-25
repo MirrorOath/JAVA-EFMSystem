@@ -1,19 +1,16 @@
 package dao.tables;
 
-import java.util.Date;
-
 public class UserInfo {
     private Integer id;
-    private String user_name;
-    private Integer user_id;
-    private String OldPassword;
+    private String userName;
     private String password;
-    private Integer age;
-    private Double money;
     private String address;
+    private String tell;
+    private Double money;
     private Integer role;
     private Integer tactics;
-    private Date date;
+    private Integer isUnusually;
+    private String OldPassword;
 
     public Integer getId() {
         return id;
@@ -23,28 +20,12 @@ public class UserInfo {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getOldPassword() {
-        return OldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        OldPassword = oldPassword;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -55,12 +36,20 @@ public class UserInfo {
         this.password = password;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTell() {
+        return tell;
+    }
+
+    public void setTell(String tell) {
+        this.tell = tell;
     }
 
     public Double getMoney() {
@@ -69,14 +58,6 @@ public class UserInfo {
 
     public void setMoney(Double money) {
         this.money = money;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Integer getRole() {
@@ -95,19 +76,27 @@ public class UserInfo {
         this.tactics = tactics;
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getIsUnusually() {
+        return isUnusually;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setIsUnusually(Integer isUnusually) {
+        this.isUnusually = isUnusually;
+    }
+
+    public String getOldPassword() {
+        return OldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        OldPassword = oldPassword;
     }
 
     @Override
     public String toString() {
-        return "UserInfo [id=" + id + ", user_name=" + user_name + ", user_id=" + user_id + ", OldPassword="
-                + OldPassword + ", password=" + password + ", age=" + age + ", money=" + money + ", address=" + address
-                + ", role=" + role + ", tactics=" + tactics + ", date=" + date + "]";
+        return "UserInfo [id=" + id + ", userName=" + userName + ", password=" + password + ", address=" + address
+                + ", tell=" + tell + ", money=" + money + ", role=" + role + ", tactics=" + tactics + ", isUnusually="
+                + isUnusually + ", OldPassword=" + OldPassword + "]";
     }
 
 }

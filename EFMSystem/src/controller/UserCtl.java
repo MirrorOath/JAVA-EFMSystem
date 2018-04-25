@@ -1,8 +1,5 @@
 package controller;
 
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import dao.BillingStrategyDao;
-import dao.UseResourcesDao;
+import dao.BillingDao;
+import dao.UseResourdsDao;
 import dao.UserInfoDao;
 import dao.tables.*;
 
@@ -23,16 +19,16 @@ import dao.tables.*;
 @RequestMapping(value = "/user/")
 public class UserCtl {
     @Autowired
-    private UseResourcesDao URDao;
+    private UseResourdsDao URDao;
     @Autowired
     private UserInfoDao userDao;
     @Autowired
-    private BillingStrategyDao BilSDao;
+    private BillingDao BilSDao;
 
     @RequestMapping(value = "register")
     public String register(Model model, HttpSession session, UserInfo userInfo) {
         System.out.println("/user/register.action");
-        System.out.println("user_name:" + userInfo.getUser_name() + "\r\npassword:" + userInfo.getPassword());
+        System.out.println("user_name:" + userInfo.getUserName() + "\r\npassword:" + userInfo.getPassword());
 
         if (userDao.register(userInfo) != null) {
             // session.setAttribute("registerRt", "注册成功");
@@ -56,7 +52,7 @@ public class UserCtl {
                     return "redirect:../index.jsp";
                 session.setAttribute("userInfo", userInfo);
                 session.setAttribute("unameNext", "退出登录");
-                return searchRecords(model, session);
+                return "redirect:../user/Homepage.jsp";
             } else {
                 session.setAttribute("signInRt", "密码错误");
                 break;
@@ -87,23 +83,23 @@ public class UserCtl {
         return "redirect:../index.jsp";
     }
 
-    private Integer[] getPriceByTactics(Integer tactics) {
-        List<BillingStrategy> rules = BilSDao.getRulesByTactics(tactics);
+/*    private Integer[] getPriceByTactics(Integer tactics) {
+        List<Billing> rules = BilSDao.getRulesByTactics(tactics);
         Integer[] price = new Integer[24];
-        for (BillingStrategy i : rules) {
+        for (Billing i : rules) {
             for (Integer j = 0; j < 24; j++) {
                 if (j >= i.getTime_start() && j < i.getTime_end())
                     price[j] = i.getPrice();
             }
         }
         return price;
-    }
+    }*/
 
-    private void sortRecords(List<UseResources> Records) {
-        Collections.sort(Records, new Comparator<UseResources>() {
-            public int compare(UseResources o1, UseResources o2) {
-                UseResources stu1 = (UseResources) o1;
-                UseResources stu2 = (UseResources) o2;
+/*    private void sortRecords(List<UseResourds> Records) {
+        Collections.sort(Records, new Comparator<UseResourds>() {
+            public int compare(UseResourds o1, UseResourds o2) {
+                UseResourds stu1 = (UseResourds) o1;
+                UseResourds stu2 = (UseResourds) o2;
                 if (stu1.getRcd_time().after(stu2.getRcd_time())) {
                     return 1;
                 } else if (stu1.getRcd_time().equals(stu2.getRcd_time())) {
@@ -114,10 +110,10 @@ public class UserCtl {
             }
 
         });
-    }
-
+    }*/
+/*
     @SuppressWarnings({ "deprecation" })
-    private double totalPrice(List<UseResources> Records, Integer tactics) {
+    private double totalPrice(List<UseResourds> Records, Integer tactics) {
         if (tactics == null || tactics == 0)
             return 0;
         Integer[] price = getPriceByTactics(tactics);
@@ -129,12 +125,12 @@ public class UserCtl {
         // for(UseResources Record : Records) {
         // System.out.println(Record.toString());
         // }
-        UseResources lastRecord = null;
+        UseResourds lastRecord = null;
         double totalPrice = 0;
         double eachHourUsed = 0;
         int hour = 0;
         long off = 0;
-        for (UseResources Record : Records) {
+        for (UseResourds Record : Records) {
             if (lastRecord == null) {
                 lastRecord = Record;
                 hour = Record.getRcd_time().getHours();
@@ -161,18 +157,18 @@ public class UserCtl {
             lastRecord = Record;
         }
         return totalPrice;
-    }
-
+    }*/
+/*
     @RequestMapping(value = "searchRecords")
     public String searchRecords(Model model, HttpSession session) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         if (userInfo == null)
             return "redirect:../index.jsp";
         session.removeAttribute("Records");
-        List<UseResources> Records = URDao.getRecordsByUserId(userInfo.getId());
+        List<UseResourds> Records = URDao.getRecordsByUserId(userInfo.getId());
         if (Records.isEmpty())
             return "redirect:../user/Homepage.jsp";
-        for (UseResources i : Records) {
+        for (UseResourds i : Records) {
             System.out.println(i.toString());
         }
         session.setAttribute("Records", Records);
@@ -182,16 +178,16 @@ public class UserCtl {
         session.setAttribute("tactics2", totalPrice(Records, 2));
         totalPrice(Records, userInfo.getTactics());
         return "redirect:../user/Homepage.jsp";
-    }
+    }*/
 
     @RequestMapping(value = "updateUserInfo")
     public String updateUserInfo(Model model, HttpSession session, UserInfo userInfo) {
-        UserInfo oldUserInfo = userDao.getUserByName(userInfo.getUser_name());
+        UserInfo oldUserInfo = userDao.getUserByName(userInfo.getUserName());
         if (oldUserInfo == null || !oldUserInfo.getPassword().equals(userInfo.getOldPassword())) {
             return "redirect:../user/Homepage.jsp";
         }
         userDao.update(oldUserInfo.getId(), userInfo);
-        return signIn(model, session, userInfo.getUser_name(), userInfo.getPassword());
+        return signIn(model, session, userInfo.getUserName(), userInfo.getPassword());
     }
 
     @RequestMapping(value = "rg_lg_do")
@@ -202,7 +198,7 @@ public class UserCtl {
             session.setAttribute("unameNext", "退出登录");
             // 点击用户名
             if ("login".equals(rorl)) {
-                if ("admin".equals(userInfo.getUser_name()))
+                if ("admin".equals(userInfo.getUserName()))
                     return "redirect:../admin/control.jsp";
                 return "redirect:../user/Homepage.jsp";
             }
@@ -226,7 +222,7 @@ public class UserCtl {
     }
 
     @SuppressWarnings("deprecation")
-    private List<UseResources> delPastRecords(List<UseResources> Records) {
+    private List<UseResourds> delPastRecords(List<UseResourds> Records) {
         Date date = new Date();
         date.setDate(1);
         date.setHours(0);
@@ -234,27 +230,27 @@ public class UserCtl {
         date.setSeconds(0);
         System.out.println(date);
         for (int i = Records.size() - 1; i >= 0; i--) {
-            UseResources item = Records.get(i);
-            if (date.after(item.getRcd_time())) {
+            UseResourds item = Records.get(i);
+            if (date.after(item.getDate())) {
                 Records.remove(item);
             }
         }
         return Records;
     }
-
+/*
     @SuppressWarnings("deprecation")
-    private BillingTable getBilTb(List<UseResources> Records, Integer tactics) {
+    private BillingTable getBilTb(List<UseResourds> Records, Integer tactics) {
         if (Records == null || tactics == null || tactics == 0)
             return null;
         Integer[] price = getPriceByTactics(tactics);
         Records = delPastRecords(Records);
         sortRecords(Records);
-        UseResources lastRecord = null;
+        UseResourds lastRecord = null;
         double totalPrice = 0;
         double eachHourUsed = 0;
         int hour = 0;
         long off = 0;
-        for (UseResources Record : Records) {
+        for (UseResourds Record : Records) {
             if (lastRecord == null) {
                 lastRecord = Record;
                 hour = Record.getRcd_time().getHours();
@@ -281,17 +277,17 @@ public class UserCtl {
             lastRecord = Record;
         }
 
-        UseResources first = Records.get(0);
-        UseResources last = Records.get(Records.size() - 1);
+        UseResourds first = Records.get(0);
+        UseResourds last = Records.get(Records.size() - 1);
         BillingTable bt = new BillingTable();
         bt.setMonth(new Date().getMonth() + 1);
         bt.setTactics(tactics);
         bt.setCost(totalPrice);
         bt.setUsed(last.getCur_used() - first.getCur_used());
         return bt;
-    }
+    }*/
 
-    @RequestMapping(value = "MEBilling")
+/*    @RequestMapping(value = "MEBilling")
     public @ResponseBody BillingTable MEBilling(Model model, HttpSession session) {
         BillingTable rt = new BillingTable();
         rt.setMonth(0);
@@ -301,13 +297,13 @@ public class UserCtl {
             return rt;
         }
         System.out.println(userInfo.toString());
-        List<UseResources> urs = URDao.getRecordsByUserId(userInfo.getId());
+        List<UseResourds> urs = URDao.getRecordsByUserId(userInfo.getId());
         BillingTable bt = getBilTb(urs, userInfo.getTactics());
         System.out.println(bt);
         return bt;
-    }
+    }*/
 
-    @RequestMapping(value = "pushMoney")
+/*    @RequestMapping(value = "pushMoney")
     public @ResponseBody boolean pushMoney(Model model, HttpSession session, Integer Number) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         System.out.println("Number: " + Number);
@@ -338,6 +334,6 @@ public class UserCtl {
 
         rt.setSuccess(true);
         return rt;
-    }
+    }*/
 
 }

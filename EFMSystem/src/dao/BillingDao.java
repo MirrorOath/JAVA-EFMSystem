@@ -7,21 +7,21 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import dao.tables.BillingStrategy;
+import dao.tables.Billing;
 import dao.util.UtilFactory;
 
 @Repository
-public class BillingStrategyDao {
+public class BillingDao {
 
     // 获得价格算法的所有规则
     @SuppressWarnings("unchecked")
-    public List<BillingStrategy> getRulesByTactics(Integer tactics){
+    public List<Billing> getRulesByTactics(Integer tactics){
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
         
         Query query = session.createQuery("from BillingStrategy where tactics = ?");
         query.setString(0, tactics.toString());
-        List<BillingStrategy> rules = (List<BillingStrategy>) query.list();
+        List<Billing> rules = (List<Billing>) query.list();
         
         tx.commit();
         session.close();
