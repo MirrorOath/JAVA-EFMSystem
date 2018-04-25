@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.*;
+import dao.tables.*;
 
 @Controller
 @RequestMapping(value = "/admin/")
