@@ -18,10 +18,14 @@ function getBillings() {
                         + "</a> </div><div id=panel-element-" + index.id
                         + " class='panel-collapse collapse' >"
                         + "<div class='panel-body'>" 
-                        + "用户id" + index.userId + "<br/>"
-                        + "账单费用" + index.cost + "<br/>"
-                        + "账单时间戳" + index.date + "<br/>"
-                        + "是否已付费: " + (index.ispaid == 1 ? "是" : "否") + "<br/>"
+                        + "用户名:   " + index.userName + "<br/>"
+                        + "账单费用:  " + index.cost + "<br/>"
+                        + "滞纳金(每天千分之一):   " + index.exCost + "<br/>"
+                        + "账单生成日期: " + index.date + "<br/>"
+                        + "是否已付费: " + (index.isPaid == 1 ? "是" : ("否" 
+                        + "<br/><a href='javascript:payNow(" 
+                        + index.id + "," + index.exCost + ")'>现在付费</a>")
+                        ) + "<br/>"
                         + "</div></div></div>"
             });
             str += "</div>";
@@ -31,10 +35,28 @@ function getBillings() {
     })
 }
 
+function payNow(id, exCost) {
+    $.ajax({
+        url : "../admin/payNow.action",
+        type : "post",
+        data : {
+            id : id,
+            exCost : exCost
+        },
+        dateType : "json",
+        success : function(data) {
+            if (data == false)
+                alert("扣费失败");
+            else
+                alert("扣费成功，请刷新查看");
+        }
+    })
+}
+
 function pushMoney() {
     var psel = document.getElementById("Number").value;
     $.ajax({
-        url : "../user/pushMoney.action",
+        url : "../admin/pushMoney.action",
         type : "post",
         data : {
             Number : psel
@@ -43,6 +65,20 @@ function pushMoney() {
         success : function(data) {
             if (data == false)
                 alert("充值失败");
+            else
+                alert("充值成功");
+        }
+    })
+}
+
+
+function getUserInfo() {
+    var psel = document.getElementById("Number").value;
+    $.ajax({
+        url : "../admin/getUserInfo.action",
+        type : "post",
+        dateType : "json",
+        success : function(data) {
         }
     })
 }

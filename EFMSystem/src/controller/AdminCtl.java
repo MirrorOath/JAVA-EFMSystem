@@ -157,15 +157,61 @@ public class AdminCtl {
         userDao.delUser(id);
         return true;
     }
-    
 
     @RequestMapping(value = "getBillings")
     public @ResponseBody List<Billing> getBillings(Model model, HttpSession session) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        if(userInfo == null)
+        if (userInfo == null)
             return null;
         List<Billing> bils = bilDao.getByUserId(userInfo.getId());
+        for (Billing bil : bils) {
+            bil.setUserName(userInfo.getUserName());
+            long days = (new Date().getTime() - bil.getDate().getTime()) / (3600 * 24 * 1000);
+            System.out.println("days: " + days);
+            bil.setExCost(days * bil.getCost() / 1000);
+        }
         return bils;
+    }
+
+    @RequestMapping(value = "payNow")
+    public @ResponseBody boolean payNow(Model model, HttpSession session, Integer id, Double exCost) {
+        if (id == null || exCost == null) {
+            System.out.println("payNow argvs error");
+            return false;
+        }
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        Billing bil = bilDao.getById(id);
+        if (userInfo == null || bil == null)
+            return false;
+        if (userInfo.getMoney() < (bil.getCost() + bil.getExCost()))
+            return false;
+        userInfo.setMoney(userInfo.getMoney() - bil.getCost() - bil.getExCost());
+        userDao.update(userInfo.getId(), userInfo);
+        bil.setIsPaid(1);
+        bil.setExCost(exCost);
+        bilDao.updateById(id, bil);
+        return true;
+    }
+    
+    @RequestMapping(value = "pushMoney")
+    public @ResponseBody boolean pushMoney(Model model, HttpSession session, Integer Number) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        if (userInfo == null || Number == null)
+            return false;
+        userInfo.setMoney(userInfo.getMoney() + Number);
+        userDao.update(userInfo.getId(), userInfo);
+        return true;
+    }
+    
+
+    @RequestMapping(value = "getUserInfo")
+    public @ResponseBody boolean getUserInfo(Model model, HttpSession session) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        if (userInfo == null)
+            return false;
+        UserInfo ui = userDao.getUserByID(userInfo.getId());
+        session.setAttribute("userInfo", ui);
+        return true;
     }
 
     private static String getStringDate(Date date) {

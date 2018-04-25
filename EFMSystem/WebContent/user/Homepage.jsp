@@ -82,11 +82,13 @@
                         <li class="active"><a href="#panel-836193"
                             data-toggle="tab">查看抄表记录</a></li>
                         <li><a href="#panel-312880"
-                            data-toggle="tab">缴费</a></li>
+                            data-toggle="tab">缴费</a></li><!-- 
                         <li><a href="#panel-312881"
-                            data-toggle="tab">查询单日电表信息</a></li>
+                            data-toggle="tab">查询单日电表信息</a></li> -->
                         <li><a href="#panel-312882"
                             data-toggle="tab">用户信息</a></li>
+                        <li><a href="#panel-312883"
+                            data-toggle="tab">充值</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="panel-836193">
@@ -124,7 +126,7 @@
                                                 <tr class="info">
                                             </c:if>
                                             <!-- <td>${Record.id }</td> -->
-                                            <td>${monthUsed.month }</td>
+                                            <td>${monthUsed.year + 1900 }.${monthUsed.month }</td>
                                             <td>${monthUsed.used }</td>
                                             <%-- 		<td>${Record.cost }</td> --%>
                                             <!-- <td>${Record.user_id }</td> -->
@@ -143,14 +145,8 @@
                                 <div id="billings"></div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="panel-312881">
+                        <div class="tab-pane" id="panel-312883">
                             <div>
-                                <p>
-                                    <a href="javascript:getMoney()">刷新</a>
-                                </p>
-                                <p id="histroyP"></p>
-                                <p id="thismonthP"></p>
-                                <p id="cur_moneyP"></p>
                                 <div class="form-group">
                                     <input class="form-control"
                                         type="text" maxlenght=100
@@ -164,6 +160,10 @@
                         <div class="tab-pane" id="panel-312882">
                             <div>
                                 <h2>当前用户信息</h2>
+                                
+                                <p>
+                                    <a href="javascript:getUserInfo()">刷新</a>
+                                </p>
                                 <form class="form-horizontal"
                                     role="form"
                                     action="${pageContext.request.contextPath}/user/updateUserInfo.action"
@@ -220,6 +220,17 @@
                                                 type="text"
                                                 required="true"
                                                 value="${userInfo.address }" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3"
+                                            class="col-sm-3 control-label">余额</label>
+                                        <div class="col-sm-9">
+                                            <input name="money"
+                                                class="form-control"
+                                                type="text"
+                                                required="true"
+                                                value="${userInfo.money }" />
                                         </div>
                                     </div>
                                     <div class="form-group">

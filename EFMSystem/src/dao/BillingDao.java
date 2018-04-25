@@ -31,6 +31,35 @@ public class BillingDao {
         return rules;
     }
 
+    public Billing getById(Integer id) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+
+        Billing bil = (Billing) session.get(Billing.class, id);
+
+        tx.commit();
+        session.close();
+        return bil;
+    }
+    
+    public Billing updateById(Integer id, Billing oldBil) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+
+        Billing newBil = (Billing) session.get(Billing.class, id);
+        newBil.setCost(oldBil.getCost());
+        newBil.setExCost(oldBil.getExCost());
+        newBil.setCurUsed(oldBil.getCurUsed());
+        newBil.setDate(oldBil.getDate());
+        newBil.setIsPaid(oldBil.getIsPaid());
+        newBil.setTactics(oldBil.getTactics());
+        newBil.setUserId(oldBil.getUserId());
+
+        tx.commit();
+        session.close();
+        return newBil;
+    }
+
     public Billing getByUserIdAndDate(String date, Integer userId) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
@@ -62,16 +91,16 @@ public class BillingDao {
         tx.commit();
         session.close();
     }
-    
+
     @SuppressWarnings("unchecked")
-    public List<Billing> getByUserId(Integer userId){
+    public List<Billing> getByUserId(Integer userId) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
-        
+
         Query query = session.createQuery("from Billing where userId = ?");
         query.setString(0, userId.toString());
         List<Billing> bils = (List<Billing>) query.list();
-        
+
         tx.commit();
         session.close();
         return bils;
