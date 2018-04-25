@@ -18,5 +18,6 @@
 				</ul>
 	</div>
 	<h1>Welcome to the admin control</h1>
+    <a href="../admin/createBilling.action">生成账单信息</a>
 </body>
 </html>

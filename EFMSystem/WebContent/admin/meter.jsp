@@ -67,15 +67,17 @@ form {
             <div>双击进行修改.</div>
         </div>
 
-        <table id="dg" title="My Users" style="width: 700px; height: 250px"
+        <table id="dg" title="抄表记录" style="width: 700px; height: 250px"
             toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
             fitColumns="true" singleSelect="true">
             <thead>
                 <tr>
-                    <th field="user_id" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">用户id</th>
-                    <th field="cur_used" width="50" editor="text">抄表数</th>
-                    <th field="rcd_time" width="50"
+                    <th field="userId" width="50"
+                        editor="{type:'validatebox',options:{readonly:true}}">用户id</th>
+                    <th field="userName" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">用户名</th>
+                    <th field="curUsed" width="50" editor="text">抄表数</th>
+                    <th field="date" width="50"
                         editor="{type:'validatebox',options:{validType:'datetime'}}">抄表时间戳</th>
                 </tr>
             </thead>

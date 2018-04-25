@@ -2,6 +2,7 @@ package controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import controller.jspused.MonthUsed;
 import dao.*;
 import dao.tables.*;
 
@@ -23,6 +25,8 @@ public class AdminCtl {
     private UseResourdsDao URDao;
     @Autowired
     private UserInfoDao userDao;
+    @Autowired
+    private BillingDao bilDao;
 
     @RequestMapping(value = "copyMeter")
     public String copyMeter(Model model, HttpSession session, String user_name, String dateStr, String copyNumber) {
@@ -46,7 +50,7 @@ public class AdminCtl {
             System.out.println(date);
 
             System.out.println(userInfo.toString());
-            UseResourds useResource = new UseResourds();
+            UseRecords useResource = new UseRecords();
             useResource.setUserId(userInfo.getId());
             useResource.setDate(date);
             useResource.setCurUsed(Integer.valueOf(copyNumber));
@@ -63,7 +67,7 @@ public class AdminCtl {
 
     @RequestMapping(value = "getAllUsers")
     public String getAllUsers(Model model, HttpSession session) {
-        List<UserInfo> usersInfo = userDao.users();
+        List<UserInfo> usersInfo = userDao.getAllUsers();
         session.setAttribute("users", usersInfo);
         return "redirect:../admin/userInfo.jsp";
     }
@@ -76,34 +80,21 @@ public class AdminCtl {
 
     @RequestMapping(value = "easyUIGetUsers")
     public @ResponseBody List<UserInfo> easyUIGetUsers(Model model, HttpSession session, UserInfo userInfo) {
-        List<UserInfo> usersInfo = userDao.users();
+        List<UserInfo> usersInfo = userDao.getAllUsers();
         return usersInfo;
     }
 
     @RequestMapping(value = "easyUISaveUser")
-    public @ResponseBody UserInfo easyUISaveUser(Model model, HttpSession session, String user_name, String password,
-            Integer age, Integer tactics, String address) {
-        UserInfo us = new UserInfo();
-        us.setAddress(address);
-        us.setUserName(user_name);
-        us.setPassword(password);
-        us.setTactics(tactics);
-        UserInfo usersInfo = userDao.register(us);
+    public @ResponseBody UserInfo easyUISaveUser(Model model, HttpSession session, UserInfo userInfo) {
+        UserInfo usersInfo = userDao.register(userInfo);
         return usersInfo;
     }
 
     @RequestMapping(value = "easyUIUpdateUser")
-    public @ResponseBody UserInfo easyUIUpdateUser(Model model, HttpSession session, String user_name, String password,
-            Integer age, Integer tactics, Integer id, String address) {
-        UserInfo us = new UserInfo();
-        us.setId(id);
-        us.setAddress(address);
-        us.setUserName(user_name);
-        us.setPassword(password);
-        us.setTactics(tactics);
-        System.out.println(us.toString());
-        UserInfo usersInfo = userDao.update(id, us);
-        return usersInfo;
+    public @ResponseBody UserInfo easyUIUpdateUser(Model model, HttpSession session, UserInfo userInfo) {
+        System.out.println(userInfo.toString());
+        UserInfo newUsersInfo = userDao.update(userInfo.getId(), userInfo);
+        return newUsersInfo;
     }
 
     @RequestMapping(value = "easyUIDelUser")
@@ -113,11 +104,15 @@ public class AdminCtl {
     }
 
     @RequestMapping(value = "easyUIGetMeters")
-    public @ResponseBody List<UseResourds> easyUIGetMeters(Model model, HttpSession session, UserInfo userInfo) {
-        List<UseResourds> Meters = URDao.getAllMeters();
+    public @ResponseBody List<UseRecords> easyUIGetMeters(Model model, HttpSession session, UserInfo userInfo) {
+        List<UseRecords> Meters = URDao.getAllMeters();
+        for (UseRecords meter : Meters) {
+            meter.setUserName(userDao.getUserByID(meter.getUserId()).getUserName());
+            System.out.println(meter.toString());
+        }
         return Meters;
     }
-    
+
     private Date stringToDate(String str) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setLenient(false);
@@ -126,40 +121,118 @@ public class AdminCtl {
             date = sdf.parse(str);
         } catch (ParseException e) {
             e.printStackTrace();
-//            model.addAttribute("copyMeterRt", "日期格式无法解析,请参照yyyy-MM-dd HH:mm:ss");
-//            break;
+            // model.addAttribute("copyMeterRt", "日期格式无法解析,请参照yyyy-MM-dd HH:mm:ss");
+            // break;
         }
         return date;
     }
 
     @RequestMapping(value = "easyUISaveMeter")
-    public @ResponseBody UseResourds easyUISaveMeter(Model model, HttpSession session, Integer user_id,
-            Integer cur_used, String rcd_time) {
-        UseResourds us = new UseResourds();
-        us.setUserId(user_id);
-        us.setCurUsed(cur_used);
-        us.setDate(stringToDate(rcd_time));
-        UseResourds ur = URDao.addRecord(us);
-        return ur;
+    public @ResponseBody UseRecords easyUISaveMeter(Model model, HttpSession session, String userName, Integer curUsed,
+            String date) {
+        UseRecords meter = new UseRecords();
+        meter.setUserId(userDao.getUserByName(userName).getId());
+        meter.setCurUsed(curUsed);
+        meter.setDate(stringToDate(date));
+        UseRecords rt = URDao.addRecord(meter);
+        rt.setUserName(userDao.getUserByID(meter.getUserId()).getUserName());
+        return rt;
     }
 
     @RequestMapping(value = "easyUIUpdateMeter")
-    public @ResponseBody UseResourds easyUIUpdateMeter(Model model, HttpSession session, Integer user_id,
-            Integer cur_used, Integer id, String rcd_time) {
-        UseResourds us = new UseResourds();
-        us.setId(id);
-        us.setUserId(user_id);
-        us.setCurUsed(cur_used);
-        us.setDate(stringToDate(rcd_time));
-        System.out.println(us.toString());
-        UseResourds ur = URDao.update(id, us);
-        return ur;
+    public @ResponseBody UseRecords easyUIUpdateMeter(Model model, HttpSession session, String userName,
+            Integer curUsed, Integer id, String date) {
+        UseRecords meter = new UseRecords();
+        meter.setUserId(userDao.getUserByName(userName).getId());
+        meter.setCurUsed(curUsed);
+        meter.setDate(stringToDate(date));
+        System.out.println(meter.toString());
+        UseRecords rt = URDao.update(id, meter);
+        rt.setUserName(userDao.getUserByID(meter.getUserId()).getUserName());
+        return rt;
     }
 
     @RequestMapping(value = "easyUIDelMeter")
     public @ResponseBody boolean easyUIDelMeter(Model model, HttpSession session, Integer id) {
         userDao.delUser(id);
         return true;
+    }
+    
+
+    @RequestMapping(value = "getBillings")
+    public @ResponseBody List<Billing> getBillings(Model model, HttpSession session) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        if(userInfo == null)
+            return null;
+        List<Billing> bils = bilDao.getByUserId(userInfo.getId());
+        return bils;
+    }
+
+    private static String getStringDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(date);
+        return dateString;
+    }
+
+    @SuppressWarnings("deprecation")
+    private List<MonthUsed> getMonthUsed(Integer year, Integer userId) {
+        Date date = new Date();
+        date.setYear(year);
+        date.setDate(1);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        UseRecords lastMonth = null;
+        UseRecords thisMonth = null;
+        List<MonthUsed> mu = new ArrayList<MonthUsed>();
+        for (int i = 1; i <= 12; i++) {
+            date.setMonth(i - 1);
+            lastMonth = URDao.getRecordsByDateAndUserId(getStringDate(date), userId);
+            date.setMonth(i);
+            thisMonth = URDao.getRecordsByDateAndUserId(getStringDate(date), userId);
+            if (lastMonth == null || thisMonth == null)
+                continue;
+            MonthUsed m = new MonthUsed();
+            m.setYear(year);
+            m.setMonth(i);
+            m.setUsed(thisMonth.getCurUsed() - lastMonth.getCurUsed());
+            m.setUserId(userId);
+            mu.add(m);
+        }
+        return mu;
+    }
+
+    @SuppressWarnings("deprecation")
+    @RequestMapping(value = "createBilling")
+    public String createBilling(Model model, HttpSession session) {
+        List<UserInfo> users = userDao.getAllUsers();
+        List<MonthUsed> useds = new ArrayList<MonthUsed>();
+        for (UserInfo user : users) {
+            useds.addAll(getMonthUsed(new Date().getYear() - 1, user.getId()));
+            useds.addAll(getMonthUsed(new Date().getYear(), user.getId()));
+        }
+        Billing bil = new Billing();
+        Date date = new Date();
+        date.setDate(1);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        for (MonthUsed used : useds) {
+            bil.setUserId(used.getUserId());
+            bil.setTactics(userDao.getUserByID(used.getUserId()).getTactics());
+            date.setYear(used.getYear());
+            date.setMonth(used.getMonth());
+            bil.setDate(date);
+            bil.setIsPaid(0);
+            bil.setExCost(0.0);
+            bil.setCurUsed(used.getUsed());
+            if (bil.getTactics() == 2)
+                bil.setCost(used.getUsed() * 2.0);
+            else
+                bil.setCost(used.getUsed() * 1.66);
+            bilDao.save(bil);
+        }
+        return "redirect:../admin/control.jsp";
     }
 
 }

@@ -15,6 +15,6 @@ public class SpecialCtl {
     public @ResponseBody void conBase() {
         Session session = UtilFactory.getSession();
         session.close();
-//        System.out.println("conBase");
+        // System.out.println("conBase");
     }
 }

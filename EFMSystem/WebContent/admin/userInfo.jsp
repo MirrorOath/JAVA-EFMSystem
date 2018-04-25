@@ -70,23 +70,27 @@ form {
 			<div>双击进行修改.</div>
 		</div>
 
-		<table id="dg" title="My Users" style="width: 700px; height: 250px"
+		<table id="dg" title="用户信息" style="width: 700px; height: 250px"
 			toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
 			fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
                     <th field="id" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">用户id(不可更改)</th>
-					<th field="user_name" width="50"
+                        editor="{type:'validatebox',options:{readonly:true}}">用户id</th>
+					<th field="userName" width="50"
 						editor="{type:'validatebox',options:{required:true}}">用户名</th>
 					<th field="password" width="50"
 						editor="{type:'validatebox',options:{required:true}}">密码</th>
-					<th field="age" width="50" editor="text">年龄</th>
-					<th field="tactics" width="50" editor="text"
+                    <th field="tell" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">电话</th>
+                    <th field="money" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">余额</th>
+                    <th field="isUnusually" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">是否异常</th>
+					<th field="tactics" width="50" 
 						editor="{type:'validatebox',options:{required:true}}">计费方式</th>
 					<th field="address" width="50"
 						editor="{type:'validatebox',options:{required:true}}">地址</th>
-					<th field="date" width="50" editor="{type:'validatebox'}">注册日期</th>
 				</tr>
 			</thead>
 		</table>

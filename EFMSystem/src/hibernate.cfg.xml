@@ -27,6 +27,6 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sour
         <property name="connection.characterEncoding">UTF-8</property>
         <mapping resource="dao/tables/UserInfo.hbm.xml"/>
         <mapping resource="dao/tables/Billing.hbm.xml"/>
-        <mapping resource="dao/tables/UseResourds.hbm.xml"/>
+        <mapping resource="dao/tables/UseRecords.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

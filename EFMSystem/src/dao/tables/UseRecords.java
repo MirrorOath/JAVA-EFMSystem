@@ -2,9 +2,10 @@ package dao.tables;
 
 import java.util.Date;
 
-public class UseResourds {
+public class UseRecords {
     private Integer id;
     private Integer userId;
+    private String userName;
     private Integer curUsed;
     private Date date;
 
@@ -22,6 +23,14 @@ public class UseResourds {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getCurUsed() {
@@ -42,7 +51,8 @@ public class UseResourds {
 
     @Override
     public String toString() {
-        return "UseResourds [id=" + id + ", userId=" + userId + ", curUsed=" + curUsed + ", date=" + date + "]";
+        return "UseResourds [id=" + id + ", userId=" + userId + ", userName=" + userName + ", curUsed=" + curUsed
+                + ", date=" + date + "]";
     }
 
 }

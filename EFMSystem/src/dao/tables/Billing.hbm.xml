@@ -8,6 +8,7 @@
         </id>
         <property name="userId" column="userId" />
         <property name="tactics" column="tactics" />
+        <property name="curUsed" column="curUsed" />
         <property name="cost" column="cost" />
         <property name="exCost" column="exCost" />
         <property name="date" column="date" type="timestamp" />

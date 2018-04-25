@@ -1,23 +1,34 @@
-function getMEBill() {
-    $
-            .ajax({
-                url : "../user/MEBilling.action",
-                type : "post",
-                dateType : "json",
-                success : function(data) {
-                    if (data.month == 0)
-                        top.location = '../index.jsp'
-                    document.getElementById("monthP").innerHTML = "当前"
-                            + data.month + "月";
-                    document.getElementById("usedP").innerHTML = "当月使用"
-                            + data.used + "度电";
+function getBillings() {
+    $.ajax({
+        url : "../admin/getBillings.action",
+        type : "post",
+        dateType : "json",
+        success : function(data) {
+            if (data == null)
+                alert("无信息或未登录")
+            var str = "<div class='panel-group' id='panel-92507'>";
+            $.each(data, function(n, index) {
+                str += "<div class='panel panel-default'>"
+                        + "<div class='panel-heading formStyle'>"
+                        + "<a class='panel-title collapsed orderIdStyle' "
+                        + "data-toggle='collapse' "
+                        + "data-parent='#panel-92507' "
+                        + "href='#panel-element-" + index.id
+                        + "' >账单号:" + index.id
+                        + "</a> </div><div id=panel-element-" + index.id
+                        + " class='panel-collapse collapse' >"
+                        + "<div class='panel-body'>" 
+                        + "用户id" + index.userId + "<br/>"
+                        + "账单费用" + index.cost + "<br/>"
+                        + "账单时间戳" + index.date + "<br/>"
+                        + "是否已付费: " + (index.ispaid == 1 ? "是" : "否") + "<br/>"
+                        + "</div></div></div>"
+            });
+            str += "</div>";
+            document.getElementById("billings").innerHTML = str;
 
-                    document.getElementById("tacticsP").innerHTML = data.tactics == 2 ? "计费标准: 普通计费"
-                            : "计费标准: 峰谷计费";
-                    document.getElementById("costP").innerHTML = "当月费用"
-                            + data.cost;
-                }
-            })
+        }
+    })
 }
 
 function pushMoney() {

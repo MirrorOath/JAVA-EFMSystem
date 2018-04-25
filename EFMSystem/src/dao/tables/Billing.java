@@ -7,6 +7,7 @@ public class Billing {
     private Integer id;
     private Integer userId;
     private Integer tactics;
+    private Integer curUsed;
     private Double cost;
     private Double exCost;
     private Date date;
@@ -34,6 +35,14 @@ public class Billing {
 
     public void setTactics(Integer tactics) {
         this.tactics = tactics;
+    }
+
+    public Integer getCurUsed() {
+        return curUsed;
+    }
+
+    public void setCurUsed(Integer curUsed) {
+        this.curUsed = curUsed;
     }
 
     public Double getCost() {
@@ -70,8 +79,8 @@ public class Billing {
 
     @Override
     public String toString() {
-        return "Billing [id=" + id + ", userId=" + userId + ", tactics=" + tactics + ", cost=" + cost + ", exCost="
-                + exCost + ", date=" + date + ", isPaid=" + isPaid + "]";
+        return "Billing [id=" + id + ", userId=" + userId + ", tactics=" + tactics + ", curUsed=" + curUsed + ", cost="
+                + cost + ", exCost=" + exCost + ", date=" + date + ", isPaid=" + isPaid + "]";
     }
 
 }

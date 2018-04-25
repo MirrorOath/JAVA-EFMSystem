@@ -1,4 +1,4 @@
-package controller;
+package controller.jspused;
 
 public class MoneyTable {
     private Double history;

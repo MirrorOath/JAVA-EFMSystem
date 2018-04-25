@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import dao.tables.UserInfo;
 import dao.util.UtilFactory;
-
 
 @Repository
 public class UserInfoDao {
@@ -26,13 +24,13 @@ public class UserInfoDao {
 
     // 返回所有用户
     @SuppressWarnings("unchecked")
-    public List<UserInfo> users() {
+    public List<UserInfo> getAllUsers() {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
         Query query = session.createQuery("from UserInfo");
         List<UserInfo> users = (List<UserInfo>) query.list();
-        
+
         tx.commit();
         session.close();
         return users;
@@ -51,12 +49,12 @@ public class UserInfoDao {
     }
 
     // 根据用户名返回一个用户
-    public UserInfo getUserByName(String user_name) {
+    public UserInfo getUserByName(String userName) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
-        Query query = session.createQuery("from UserInfo where user_name = ?");
-        query.setString(0, user_name);
+        Query query = session.createQuery("from UserInfo where userName = ?");
+        query.setString(0, userName);
         UserInfo userInfo = (UserInfo) query.uniqueResult();
 
         tx.commit();
@@ -68,7 +66,7 @@ public class UserInfoDao {
     public void delUser(Integer userId) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
-        
+
         session.delete(getUserByID(userId));
 
         tx.commit();
@@ -78,16 +76,21 @@ public class UserInfoDao {
     // 注册一个新的用户
     public UserInfo register(UserInfo userInfo) {
         // 如果按用户名查询有结果,则返回false,注册失败
-        if(getUserByName(userInfo.getUserName()) != null)
+        if (getUserByName(userInfo.getUserName()) != null)
             return null;
 
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
-        
-        userInfo.setTactics(1);
-        userInfo.setMoney(0.0);
+
+        userInfo.setId(null);
+        if (userInfo.getTactics() == null)
+            userInfo.setTactics(1);
+        if (userInfo.getMoney() == null)
+            userInfo.setMoney(0.0);
+        if (userInfo.getIsUnusually() == null)
+            userInfo.setIsUnusually(0);
         session.save(userInfo);
-        
+
         tx.commit();
         session.close();
         return userInfo;
@@ -107,8 +110,8 @@ public class UserInfoDao {
     public UserInfo update(Integer id, UserInfo newUi) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
-        
-        UserInfo oldUi = (UserInfo)session.get(UserInfo.class, id);
+
+        UserInfo oldUi = (UserInfo) session.get(UserInfo.class, id);
         oldUi.setUserName(newUi.getUserName());
         oldUi.setPassword(newUi.getPassword());
         oldUi.setAddress(newUi.getAddress());
@@ -117,16 +120,17 @@ public class UserInfoDao {
         oldUi.setRole(newUi.getRole());
         oldUi.setTactics(newUi.getTactics());
         oldUi.setIsUnusually(newUi.getIsUnusually());
-        
+
         tx.commit();
         session.close();
         return oldUi;
     }
 
     // 基于用户id修改用户密码
-    public boolean rePwd(Integer user_id, String pwd) {
+    public boolean rePwd(Integer userId, String pwd) {
 
-            return false;
+        return false;
     }
+
 
 }

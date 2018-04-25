@@ -38,7 +38,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a
-							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.user_name }</a>
+							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.userName }</a>
 						</li>
 						<li><a
 							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
@@ -110,7 +110,7 @@
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">账号</label>
 									<div class="col-sm-10">
-										<input name="user_name"
+										<input name="userName"
 											class="easyui-validatebox form-control" type="text"
 											required="true" validType="userName" />
 									</div>
@@ -136,7 +136,7 @@
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">账号</label>
 									<div class="col-sm-10">
-										<input name="user_name"
+										<input name="userName"
 											class="easyui-validatebox form-control" type="text"
 											required="true" validType="userName" />
 									</div>
@@ -162,7 +162,7 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
                                     <div class="col-sm-10">
-                                        <input name="user_name"
+                                        <input name="userName"
                                             class="easyui-validatebox form-control" type="text"
                                             required="true" validType="userName" />
                                     </div>

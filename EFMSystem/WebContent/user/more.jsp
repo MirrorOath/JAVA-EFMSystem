@@ -34,9 +34,9 @@
                 <div class="collapse navbar-collapse"
                     id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a
-                            href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.user_name }</a>
-                        </li>
+						<li><a
+							href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=login">${uname }${userInfo.userName }</a>
+						</li>
                         <li><a
                             href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=register">${unameNext }</a>
                         </li>
