@@ -227,6 +227,7 @@ public class UserCtl {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private List<UseResources> delPastRecords(List<UseResources> Records) {
         Date date = new Date();
         date.setDate(1);
@@ -306,6 +307,39 @@ public class UserCtl {
         BillingTable bt = getBilTb(urs, userInfo.getTactics());
         System.out.println(bt);
         return bt;
+    }
+
+    @RequestMapping(value = "pushMoney")
+    public @ResponseBody boolean pushMoney(Model model, HttpSession session, Integer Number) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        System.out.println("Number: " + Number);
+        if (userInfo == null || userDao.getUserByID(userInfo.getId()) == null)
+            return false;
+        userInfo.setMoney(userInfo.getMoney() + Number);
+        System.out.println(userInfo.toString());
+        userDao.update(userInfo.getId(), userInfo);
+        return true;
+    }
+
+    @RequestMapping(value = "getMoney")
+    public @ResponseBody MoneyTable getMoney(Model model, HttpSession session) {
+        MoneyTable rt = new MoneyTable();
+        rt.setSuccess(false);
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        if (userInfo == null || userDao.getUserByID(userInfo.getId()) == null) {
+            System.out.println("userInfo is null");
+            return rt;
+        }
+        rt.setHistory(userInfo.getMoney());
+        BigDecimal b = new BigDecimal(rt.getHistory() - totalPrice(URDao.getRecordsByUserId(userInfo.getId()), userInfo.getTactics()));
+        
+        rt.setCur_money(b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        
+        BillingTable bt = getBilTb(URDao.getRecordsByUserId(userInfo.getId()), userInfo.getTactics());
+        rt.setThismonthcost(bt.getCost());
+
+        rt.setSuccess(true);
+        return rt;
     }
 
 }

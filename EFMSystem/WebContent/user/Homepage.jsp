@@ -18,8 +18,7 @@
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script
-        src="${pageContext.request.contextPath }/js/Homepage.js"></script>
+	<script src="${pageContext.request.contextPath }/js/Homepage.js"></script>
 
 	<jsp:include page="util.jsp" />
 	<div class="container">
@@ -126,16 +125,30 @@
 						<div class="tab-pane" id="panel-312880">
 							<div>
 								<p>
-									<a
-										href="javascript:getMEBill()">刷新</a>
+									<a href="javascript:getMEBill()">刷新</a>
 								</p>
 								<p id="monthP"></p>
-                                <p id="usedP"></p>
-                                <p id="tacticsP"></p>
-                                <p id="costP"></p>
+								<p id="usedP"></p>
+								<p id="tacticsP"></p>
+								<p id="costP"></p>
 							</div>
 						</div>
-						<div class="tab-pane" id="panel-312881"></div>
+						<div class="tab-pane" id="panel-312881">
+							<div>
+								<p>
+									<a href="javascript:getMoney()">刷新</a>
+								</p>
+								<p id="histroyP"></p>
+								<p id="thismonthP"></p>
+								<p id="cur_moneyP"></p>
+								<div class="form-group">
+									<input class="form-control" type="text" maxlenght=100
+										id="Number" />
+								</div>
+								<button type="submit" onclick="javascript:pushMoney()"
+									class="btn btn-default">充值</button>
+							</div>
+						</div>
 					</div>
 				</div>
 

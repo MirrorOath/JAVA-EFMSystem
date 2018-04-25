@@ -9,7 +9,7 @@ public class UserInfo {
     private String OldPassword;
     private String password;
     private Integer age;
-    private Integer money;
+    private Double money;
     private String address;
     private Integer role;
     private Integer tactics;
@@ -63,11 +63,11 @@ public class UserInfo {
         this.age = age;
     }
 
-    public Integer getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 

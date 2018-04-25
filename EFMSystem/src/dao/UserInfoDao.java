@@ -82,6 +82,8 @@ public class UserInfoDao {
         Transaction tx = session.beginTransaction();
         
         userInfo.setDate(new Date());
+        userInfo.setTactics(1);
+        userInfo.setMoney(0.0);
         session.save(userInfo);
         
         tx.commit();
@@ -111,6 +113,7 @@ public class UserInfoDao {
         ui.setAge(userInfo.getAge());
         ui.setAddress(userInfo.getAddress());
         ui.setTactics(userInfo.getTactics());
+        ui.setMoney(userInfo.getMoney());
         
         tx.commit();
         session.close();
