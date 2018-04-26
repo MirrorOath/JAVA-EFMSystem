@@ -267,6 +267,7 @@ public class AdminCtl {
         date.setMinutes(0);
         date.setSeconds(0);
         for (MonthUsed used : useds) {
+            System.out.println(used.getUserId());
             bil.setUserId(used.getUserId());
             bil.setTactics(userDao.getUserByID(used.getUserId()).getTactics());
             date.setYear(used.getYear());
