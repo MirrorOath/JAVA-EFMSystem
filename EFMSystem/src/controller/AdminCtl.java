@@ -168,7 +168,8 @@ public class AdminCtl {
             bil.setUserName(userInfo.getUserName());
             long days = (new Date().getTime() - bil.getDate().getTime()) / (3600 * 24 * 1000);
             System.out.println("days: " + days);
-            bil.setExCost(days * bil.getCost() / 1000);
+            if(bil.getIsPaid() != 1)
+                bil.setExCost(days * bil.getCost() / 1000);
         }
         return bils;
     }
