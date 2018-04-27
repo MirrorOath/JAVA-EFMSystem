@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import controller.jspused.MonthUsed;
+import controller.jspused.OneDayInfo;
+import controller.util.Count;
 import dao.*;
 import dao.tables.*;
+import dao.util.UtilDao;
 
 @Controller
 @RequestMapping(value = "/admin/")
 public class AdminCtl {
+    @Autowired
+    private UtilDao<Billing> bilUDao;
     @Autowired
     private UseResourdsDao URDao;
     @Autowired
@@ -158,6 +163,7 @@ public class AdminCtl {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @RequestMapping(value = "getBillings")
     public @ResponseBody List<Billing> getBillings(Model model, HttpSession session) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
@@ -168,8 +174,10 @@ public class AdminCtl {
             bil.setUserName(userInfo.getUserName());
             long days = (new Date().getTime() - bil.getDate().getTime()) / (3600 * 24 * 1000);
             System.out.println("days: " + days);
-            if(bil.getIsPaid() != 1)
+            if (bil.getIsPaid() != 1)
                 bil.setExCost(days * bil.getCost() / 1000);
+            bil.setYear(bil.getDate().getYear() + 1900);
+            bil.setMonth(bil.getDate().getMonth());
         }
         return bils;
     }
@@ -193,7 +201,7 @@ public class AdminCtl {
         bilDao.updateById(id, bil);
         return true;
     }
-    
+
     @RequestMapping(value = "pushMoney")
     public @ResponseBody boolean pushMoney(Model model, HttpSession session, Integer Number) {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
@@ -203,7 +211,48 @@ public class AdminCtl {
         userDao.update(userInfo.getId(), userInfo);
         return true;
     }
-    
+
+    private static Date ss(String str) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        Date date = null;
+        try {
+            date = sdf.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    @SuppressWarnings("deprecation")
+    @RequestMapping(value = "forDate")
+    public @ResponseBody OneDayInfo forDate(Model model, HttpSession session, String date) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        OneDayInfo oi = new OneDayInfo();
+        if (userInfo == null || date == null) {
+            oi.setSuccess(false);
+            return oi;
+        }
+        Date d = ss(date);
+        // System.out.println(Count.getStringDate(d));
+        Integer userId = userInfo.getId();
+        UseRecords r0 = URDao.getRecordsByDateAndUserId(Count.getStringDate(d), userId);
+        d.setHours(6);
+        UseRecords r6 = URDao.getRecordsByDateAndUserId(Count.getStringDate(d), userId);
+        d.setHours(22);
+        UseRecords r22 = URDao.getRecordsByDateAndUserId(Count.getStringDate(d), userId);
+        d.setHours(0);
+        d.setDate(d.getDate() + 1);
+        UseRecords n0 = URDao.getRecordsByDateAndUserId(Count.getStringDate(d), userId);
+        oi.setLowUsed((r6.getCurUsed() - r0.getCurUsed()) + (n0.getCurUsed() - r22.getCurUsed()));
+        oi.setHighUsed(r22.getCurUsed() - r6.getCurUsed());
+        oi.setR0(r0);
+        oi.setR6(r6);
+        oi.setR22(r22);
+        oi.setN0(n0);
+        oi.setSuccess(true);
+        return oi;
+    }
 
     @RequestMapping(value = "getUserInfo")
     public @ResponseBody UserInfo getUserInfo(Model model, HttpSession session) {
@@ -283,6 +332,52 @@ public class AdminCtl {
             bilDao.save(bil);
         }
         return "redirect:../admin/control.jsp";
+    }
+
+    @RequestMapping("easyUIGetBillings")
+    public @ResponseBody List<Billing> easyUIGetTableEndss() {
+        List<Billing> bils = bilUDao.getAll("Billing");
+        for (Billing bil : bils) {
+            bil.setUserName(userDao.getUserByID(bil.getUserId()).getUserName());
+        }
+        return bils;
+    }
+
+    @RequestMapping("easyUISaveBilling")
+    public @ResponseBody Billing easyUISaveTableEnds(String userName, Integer tactics, Integer curUsed, Double cost,
+            Double exCost, Integer isPaid, String date) {
+        Billing obj = new Billing();
+        obj.setUserId(userDao.getUserByName(userName).getId());
+        obj.setTactics(tactics);
+        obj.setCurUsed(curUsed);
+        obj.setCost(cost);
+        obj.setExCost(exCost);
+        obj.setDate(Count.stringToDate(date));
+        obj.setIsPaid(isPaid);
+        Billing rt = bilUDao.save(obj);
+        return rt;
+    }
+
+    @RequestMapping("easyUIUpdateBilling")
+    public @ResponseBody Billing easyUIUpdateTableEnds(Integer id, String userName, Integer tactics, Integer curUsed,
+            Double cost, Double exCost, Integer isPaid, String date) {
+        Billing obj = new Billing();
+        obj.setUserId(userDao.getUserByName(userName).getId());
+        obj.setTactics(tactics);
+        obj.setCurUsed(curUsed);
+        obj.setCost(cost);
+        obj.setExCost(exCost);
+        obj.setDate(Count.stringToDate(date));
+        obj.setIsPaid(isPaid);
+        Billing rt = bilDao.updateById(id, obj);
+        rt.setUserName(userDao.getUserByID(rt.getUserId()).getUserName());
+        return rt;
+    }
+
+    @RequestMapping("easyUIDelBilling")
+    public @ResponseBody boolean easyUIDelTableEnds(Integer id) {
+        bilUDao.del(bilUDao.getById("Billing", id));
+        return true;
     }
 
 }

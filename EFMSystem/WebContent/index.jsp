@@ -12,7 +12,7 @@
 	rel="stylesheet" media="screen">
 
 </head>
-<body background="image/1.jpg" style="background-size:cover" onload="conBase()" >
+<body background="image/back.jpg" style="background-size:cover" onload="conBase()" >
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
@@ -99,7 +99,7 @@
 				<div class="tabbable" id="tabs-421777">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#panel-836193" data-toggle="tab">注册</a></li>
-						<li><a href="#panel-312880" data-toggle="tab">用户登录登录</a></li>
+						<li><a href="#panel-312880" data-toggle="tab">用户登录</a></li>
                         <li><a href="#panel-312881" data-toggle="tab">管理员登录</a></li>
 					</ul>
 					<div class="tab-content">

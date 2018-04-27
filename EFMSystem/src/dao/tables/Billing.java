@@ -13,6 +13,8 @@ public class Billing {
     private Double exCost;
     private Date date;
     private Integer isPaid;
+    private Integer year;
+    private Integer month;
 
     public Integer getId() {
         return id;
@@ -86,11 +88,27 @@ public class Billing {
         this.isPaid = isPaid;
     }
 
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
     @Override
     public String toString() {
         return "Billing [id=" + id + ", userId=" + userId + ", userName=" + userName + ", tactics=" + tactics
                 + ", curUsed=" + curUsed + ", cost=" + cost + ", exCost=" + exCost + ", date=" + date + ", isPaid="
-                + isPaid + "]";
+                + isPaid + ", year=" + year + ", month=" + month + "]";
     }
 
 }

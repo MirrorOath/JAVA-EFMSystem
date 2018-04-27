@@ -40,14 +40,14 @@ form {
 <script type="text/javascript">
                 $(function () {
                     $('#dg').edatagrid({
-                        url: '../admin/easyUIGetMeters.action',
-                        saveUrl: '../admin/easyUISaveMeter.action',
-                        updateUrl: '../admin/easyUIUpdateMeter.action',
-                        destroyUrl: '../admin/easyUIDelMeter.action'
+                        url: '../admin/easyUIGetBillings.action',
+                        saveUrl: '../admin/easyUISaveBilling.action',
+                        updateUrl: '../admin/easyUIUpdateBilling.action',
+                        destroyUrl: '../admin/easyUIDelBilling.action'
                     });
                 });
             </script>
-<title>管理用户</title>
+<title>管理账单</title>
 </head>
 
 <body>
@@ -64,14 +64,14 @@ form {
                 href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
         </ul>
     </div>
-
-    <div>
+    
+        <div>
         <div class="demo-info" style="margin-bottom: 10px">
             <div class="demo-tip icon-tip">&nbsp;</div>
             <div>双击进行修改.</div>
         </div>
 
-        <table id="dg" title="抄表记录" style="width: 700px; height: 250px"
+        <table id="dg" title="用户信息" style="width: 700px; height: 250px"
             toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
             fitColumns="true" singleSelect="true">
             <thead>
@@ -79,10 +79,19 @@ form {
                     <th field="userId" width="50"
                         editor="{type:'validatebox',options:{readonly:true}}">用户id</th>
                     <th field="userName" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">用户名</th>
-                    <th field="curUsed" width="50" editor="text">抄表数</th>
+                        editor="{type:'validatebox',options:{readonly:true}}">用户名</th>
+                    <th field="tactics" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">计费方式</th>
+                    <th field="curUsed" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">用量</th>
+                    <th field="cost" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">费用</th>
+                    <th field="exCost" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">滞纳金</th>
+                    <th field="isPaid" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">付费状态</th>
                     <th field="date" width="50"
-                        editor="{type:'validatebox',options:{validType:'datetime'}}">抄表时间戳</th>
+                        editor="{type:'validatebox',options:{required:true}}">账单生成日</th>
                 </tr>
             </thead>
         </table>
@@ -97,6 +106,6 @@ form {
                 onclick="javascript:$('#dg').edatagrid('cancelRow')">取消</a>
         </div>
     </div>
-</body>
 
+</body>
 </html>
