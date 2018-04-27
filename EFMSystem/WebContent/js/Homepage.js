@@ -88,7 +88,7 @@ function forDate() {
             else {
                 var str = ""
                 str += "<div><table class='table'><thead>"
-                        + "<tr><th>时间电</th><th>电表数</th></tr></thead><tbody>";
+                        + "<tr><th>时间点</th><th>电表数</th></tr></thead><tbody>";
                 str += "<tr class='success'><td>" + data.r0.date + "</td><td>"
                         + data.r0.curUsed + "</td></tr>";
                 str += "<tr class='info'><td>" + data.r6.date + "</td><td>"
