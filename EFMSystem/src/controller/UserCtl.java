@@ -30,7 +30,7 @@ public class UserCtl {
 
     @RequestMapping(value = "register")
     public String register(Model model, HttpSession session, UserInfo userInfo) {
-        System.out.println("/user/register.action");
+        System.out.println(userInfo.toString());
         System.out.println("userName:" + userInfo.getUserName() + "\r\npassword:" + userInfo.getPassword());
 
         if (userDao.register(userInfo) != null) {

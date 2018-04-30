@@ -12,7 +12,7 @@
 	rel="stylesheet" media="screen">
 
 </head>
-<body background="image/back.jpg" style="background-size:cover" onload="conBase()" >
+<body background="image/1.jpg" style="background-size:cover" onload="conBase()" >
 	<script src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>

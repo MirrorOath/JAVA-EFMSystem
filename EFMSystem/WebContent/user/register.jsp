@@ -9,7 +9,11 @@
 <link
     href="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/css/bootstrap.min.css"
     rel="stylesheet" media="screen">
-
+<script type="text/javascript">
+    function SetFirstStr(str, name, role) {
+        document.getElementById('role').value = role;
+    }
+</script>
 </head>
 <body background="../image/back.jpg" style="background-size: cover">
     <script
@@ -120,11 +124,32 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputEmail3"
+                            class="col-sm-2 control-label">用户类型</label>
+                        <div class="col-sm-10">
+                            <input name="role" id="role"
+                                class="easyui-validatebox form-control"
+                                type="text" readonly="true" />
+                            <button data-toggle="dropdown"
+                                class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                    href="javascript:SetFirstStr('居民用户','role',0)">居民用户</a></li>
+                                <li><a
+                                    href="javascript:SetFirstStr('商家用户','role',1)">商家用户</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit"
                                 class="btn btn-default">注册</button>
                         </div>
                     </div>
+
                 </form>
             </div>
             <div class="col-md-4 column"></div>
@@ -132,11 +157,11 @@
     </div>
     <div>
         <%
-		    if (session.getAttribute("msg") != null) {
-		        out.println("msg:" + session.getAttribute("msg") + "</br>");
-		        session.removeAttribute("msg");
-		    }
-		%>
+            if (session.getAttribute("msg") != null) {
+                out.println("msg:" + session.getAttribute("msg") + "</br>");
+                session.removeAttribute("msg");
+            }
+        %>
     </div>
 </body>
 </html>

@@ -86,20 +86,43 @@ public class AdminCtl {
     @RequestMapping(value = "easyUIGetUsers")
     public @ResponseBody List<UserInfo> easyUIGetUsers(Model model, HttpSession session, UserInfo userInfo) {
         List<UserInfo> usersInfo = userDao.getAllUsers();
+        for (UserInfo obj : usersInfo) {
+            if(obj.getRole() == null) {
+                obj.setRoleStr("未知");
+            }
+            else if (obj.getRole() == 1)
+                obj.setRoleStr("商家用户");
+            else if (obj.getRole() == 0)
+                obj.setRoleStr("居民用户");
+            else
+                obj.setRoleStr("未知");
+        }
         return usersInfo;
     }
 
     @RequestMapping(value = "easyUISaveUser")
     public @ResponseBody UserInfo easyUISaveUser(Model model, HttpSession session, UserInfo userInfo) {
-        UserInfo usersInfo = userDao.register(userInfo);
-        return usersInfo;
+        UserInfo obj = userDao.register(userInfo);
+        if (obj.getRole() == 1)
+            obj.setRoleStr("商家用户");
+        else if (obj.getRole() == 0)
+            obj.setRoleStr("居民用户");
+        else
+            obj.setRoleStr("未知");
+        return obj;
     }
 
     @RequestMapping(value = "easyUIUpdateUser")
     public @ResponseBody UserInfo easyUIUpdateUser(Model model, HttpSession session, UserInfo userInfo) {
         System.out.println(userInfo.toString());
-        UserInfo newUsersInfo = userDao.update(userInfo.getId(), userInfo);
-        return newUsersInfo;
+        UserInfo obj = userDao.update(userInfo.getId(), userInfo);
+        if (obj.getRole() == 1)
+            obj.setRoleStr("商家用户");
+        else if (obj.getRole() == 0)
+            obj.setRoleStr("居民用户");
+        else
+            obj.setRoleStr("未知");
+        return obj;
     }
 
     @RequestMapping(value = "easyUIDelUser")

@@ -57,11 +57,11 @@ form {
             <li><a
                 href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
             <li><a
+                href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
+                <li><a
                 href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
             <li><a
                 href="${pageContext.request.contextPath }/admin/meter.jsp">管理抄表记录</a></li>
-            <li><a
-                href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
         </ul>
     </div>
 
@@ -84,12 +84,14 @@ form {
 						editor="{type:'validatebox',options:{required:true}}">密码</th>
                     <th field="tell" width="50"
                         editor="{type:'validatebox',options:{required:true}}">电话</th>
-<!--                     <th field="money" width="50"
+                     <th field="money" width="50"
                         editor="{type:'validatebox',options:{required:true}}">余额</th>
-                    <th field="isUnusually" width="50"
-                        editor="{type:'validatebox',options:{required:true}}">是否异常</th>
+                     <th field="role" width="50"
+                        editor="{type:'validatebox',options:{required:true}}">用户类型</th>
+                     <th field="roleStr" width="50"
+                        editor="{type:'validatebox',options:{readonly:true}}">用户类型名称</th>
 					<th field="tactics" width="50" 
-						editor="{type:'validatebox',options:{required:true}}">计费方式</th> -->
+						editor="{type:'validatebox',options:{required:true}}">计费方式</th>
 					<th field="address" width="50"
 						editor="{type:'validatebox',options:{required:true}}">地址</th>
 				</tr>

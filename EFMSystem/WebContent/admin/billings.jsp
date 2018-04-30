@@ -57,11 +57,11 @@ form {
             <li><a
                 href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
             <li><a
+                href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
+                <li><a
                 href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
             <li><a
                 href="${pageContext.request.contextPath }/admin/meter.jsp">管理抄表记录</a></li>
-            <li><a
-                href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
         </ul>
     </div>
     
@@ -71,7 +71,7 @@ form {
             <div>双击进行修改.</div>
         </div>
 
-        <table id="dg" title="用户信息" style="width: 700px; height: 250px"
+        <table id="dg" title="账单信息" style="width: 700px; height: 250px"
             toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
             fitColumns="true" singleSelect="true">
             <thead>
@@ -107,5 +107,8 @@ form {
         </div>
     </div>
 
+    <div>
+            <h2>付费状态: 1:已付费     0:未付费</h2>
+    </div>
 </body>
 </html>

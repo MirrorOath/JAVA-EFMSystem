@@ -8,6 +8,7 @@ public class UserInfo {
     private String tell;
     private Double money;
     private Integer role;
+    private String roleStr;
     private Integer tactics;
     private Integer isUnusually;
     private String OldPassword;
@@ -68,6 +69,14 @@ public class UserInfo {
         this.role = role;
     }
 
+    public String getRoleStr() {
+        return roleStr;
+    }
+
+    public void setRoleStr(String roleStr) {
+        this.roleStr = roleStr;
+    }
+
     public Integer getTactics() {
         return tactics;
     }
@@ -95,8 +104,8 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UserInfo [id=" + id + ", userName=" + userName + ", password=" + password + ", address=" + address
-                + ", tell=" + tell + ", money=" + money + ", role=" + role + ", tactics=" + tactics + ", isUnusually="
-                + isUnusually + ", OldPassword=" + OldPassword + "]";
+                + ", tell=" + tell + ", money=" + money + ", role=" + role + ", roleStr=" + roleStr + ", tactics="
+                + tactics + ", isUnusually=" + isUnusually + ", OldPassword=" + OldPassword + "]";
     }
 
 }
