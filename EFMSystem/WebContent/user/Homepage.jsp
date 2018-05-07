@@ -19,6 +19,8 @@
         src="${pageContext.request.contextPath }/easyUI/jquery.min.js"></script>
     <script
         src="${pageContext.request.contextPath }/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script language="javascript" src="../jqprint/jquery.jqprint-0.3.js"></script>
     <script src="${pageContext.request.contextPath }/js/Homepage.js"></script>
 
     <jsp:include page="util.jsp" />

@@ -46,6 +46,8 @@ function getBillings() {
                         + (index.isPaid == 1 ? "是" : ("否"
                                 + "<br/><a href='javascript:payNow(" + index.id
                                 + "," + index.exCost + ")'>现在付费</a>"))
+                        + "<br/>"
+                        + "<a href='javascript:MyJprintf(" + index.id + ")'>打印</a>"
                         + "<br/>" + "</div></div></div>"
             });
             str += "</div>";
@@ -53,6 +55,10 @@ function getBillings() {
 
         }
     })
+}
+
+function MyJprintf(id){
+    $("#panel-element-" + id).jqprint();
 }
 
 function payNow(id, exCost) {
