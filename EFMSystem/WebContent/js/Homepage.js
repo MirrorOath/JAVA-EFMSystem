@@ -48,7 +48,7 @@ function getBillings() {
                                 + "," + index.exCost + ")'>现在付费</a>"))
                         + "<br/>"
                         + "<a href='javascript:MyJprintf(" + index.id + ")'>打印</a>"
-                        + "<br/>" + "</div></div></div>"
+                        + "<br/>" + "</div></div></div>";
             });
             str += "</div>";
             document.getElementById("billings").innerHTML = str;
