@@ -109,7 +109,7 @@ function forDate() {
                         + data.lowUsed + "元<br/>"
                 str += "忙时(6:00-22:00)使用: " + data.highUsed + "*2元/度="
                         + (data.highUsed * 2) + "元<br/>"
-                str += "当天总费用: " + (data.highUsed * 1 + data.highUsed * 2)
+                str += "当天总费用: " + (data.lowUsed * 1 + data.highUsed * 2)
                         + "元<br/>"
                 str += "</p></div>";
                 document.getElementById("forDateOut").innerHTML = str;
