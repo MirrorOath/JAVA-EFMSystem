@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,21 +8,32 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import dao.tables.UseRecords;
+import dao.util.UtilDao;
 import dao.util.UtilFactory;
 
 @Repository
-public class UseResourdsDao {
+public class UseRecordsDao extends UtilDao<UseRecords> {
 
-    // 添加一条抄表记录
-    public UseRecords addRecord(UseRecords useResource) {
+    public List<UseRecords> getAll() {
+        return getAll("UseRecords");
+    }
+
+    public UseRecords getById(Integer id) {
+        return getById("UseRecords", id);
+    }
+    
+    public UseRecords update(Integer id, UseRecords newObj) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
-        session.save(useResource);
+        UseRecords oldObj = (UseRecords) session.get(UseRecords.class, id);
+        oldObj.setCurUsed(newObj.getCurUsed());
+        oldObj.setDate(newObj.getDate());
+        oldObj.setUserId(newObj.getUserId());
 
         tx.commit();
         session.close();
-        return useResource;
+        return oldObj;
     }
 
     // 根据date和userId返回一条抄表记录
@@ -34,7 +44,7 @@ public class UseResourdsDao {
         Query query = session.createQuery("from UseRecords where userId = ? and date = ?");
         query.setString(0, userId.toString());
         query.setString(1, date);
-//        System.out.println(query + "\tuserId=" + userId + "\tdate=" + date);
+        System.out.println(query + "\tuserId=" + userId + "\tdate=" + date);
         UseRecords record = (UseRecords) query.uniqueResult();
 
         tx.commit();
@@ -55,33 +65,6 @@ public class UseResourdsDao {
         tx.commit();
         session.close();
         return Records;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<UseRecords> getAllMeters() {
-        Session session = UtilFactory.getSession();
-        Transaction tx = session.beginTransaction();
-
-        Query query = session.createQuery("from UseRecords");
-        List<UseRecords> Records = (List<UseRecords>) query.list();
-
-        tx.commit();
-        session.close();
-        return Records;
-    }
-
-    public UseRecords update(Integer id, UseRecords newUr) {
-        Session session = UtilFactory.getSession();
-        Transaction tx = session.beginTransaction();
-
-        UseRecords oldUr = (UseRecords) session.get(UseRecords.class, id);
-        oldUr.setCurUsed(newUr.getCurUsed());
-        oldUr.setUserId(newUr.getUserId());
-        oldUr.setDate(newUr.getDate());
-
-        tx.commit();
-        session.close();
-        return oldUr;
     }
 
 }

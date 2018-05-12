@@ -40,10 +40,10 @@ form {
 <script type="text/javascript">
                 $(function () {
                     $('#dg').edatagrid({
-                        url: '../admin/easyUIGetBillings.action',
-                        saveUrl: '../admin/easyUISaveBilling.action',
-                        updateUrl: '../admin/easyUIUpdateBilling.action',
-                        destroyUrl: '../admin/easyUIDelBilling.action'
+                        url: '../easyUI/easyUIGetBillings.action',
+                        saveUrl: '../easyUI/easyUISaveBilling.action',
+                        updateUrl: '../easyUI/easyUIUpdateBilling.action',
+                        destroyUrl: '../easyUI/easyUIDelBilling.action'
                     });
                 });
             </script>
@@ -71,7 +71,7 @@ form {
             <div>双击进行修改.</div>
         </div>
 
-        <table id="dg" title="账单信息" style="width: 700px; height: 250px"
+        <table id="dg" title="账单信息" style="width: 1000px; height: 700px"
             toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
             fitColumns="true" singleSelect="true">
             <thead>

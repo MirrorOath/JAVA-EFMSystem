@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import controller.jspused.MonthUsed;
 import dao.BillingDao;
-import dao.UseResourdsDao;
+import dao.UseRecordsDao;
 import dao.UserInfoDao;
 import dao.tables.*;
 
@@ -22,7 +22,7 @@ import dao.tables.*;
 @RequestMapping(value = "/user/")
 public class UserCtl {
     @Autowired
-    private UseResourdsDao URDao;
+    private UseRecordsDao URDao;
     @Autowired
     private UserInfoDao userDao;
     @Autowired

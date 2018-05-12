@@ -10,12 +10,38 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import dao.tables.Billing;
-import dao.tables.UseRecords;
+import dao.util.UtilDao;
 import dao.util.UtilFactory;
 
 @Repository
-public class BillingDao {
+public class BillingDao extends UtilDao<Billing> {
 
+    public List<Billing> getAll() {
+        return getAll("Billing");
+    }
+
+    public Billing getById(Integer id) {
+        return getById("Billing", id);
+    }
+    
+    public Billing update(Integer id, Billing newObj) {
+        Session session = UtilFactory.getSession();
+        Transaction tx = session.beginTransaction();
+
+        Billing oldObj = (Billing) session.get(Billing.class, id);
+        oldObj.setUserId(newObj.getUserId());
+        oldObj.setTactics(newObj.getTactics());
+        oldObj.setCurUsed(newObj.getCurUsed());
+        oldObj.setCost(newObj.getCost());
+        oldObj.setExCost(newObj.getExCost());
+        oldObj.setDate(newObj.getDate());
+        oldObj.setIsPaid(newObj.getIsPaid());
+
+        tx.commit();
+        session.close();
+        return oldObj;
+    }
+    
     // 获得价格算法的所有规则
     @SuppressWarnings("unchecked")
     public List<Billing> getRulesByTactics(Integer tactics) {
@@ -29,17 +55,6 @@ public class BillingDao {
         tx.commit();
         session.close();
         return rules;
-    }
-
-    public Billing getById(Integer id) {
-        Session session = UtilFactory.getSession();
-        Transaction tx = session.beginTransaction();
-
-        Billing bil = (Billing) session.get(Billing.class, id);
-
-        tx.commit();
-        session.close();
-        return bil;
     }
     
     public Billing updateById(Integer id, Billing oldBil) {
@@ -80,7 +95,7 @@ public class BillingDao {
         return dateString;
     }
 
-    public void save(Billing bil) {
+    public void saved(Billing bil) {
         Session session = UtilFactory.getSession();
         Transaction tx = session.beginTransaction();
 
