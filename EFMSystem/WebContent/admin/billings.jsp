@@ -37,16 +37,21 @@ form {
     border: 1px solid #ccc;
 }
 </style>
+
+<script src="../jexcel/Blob.js"></script>
+<script src="../jexcel/FileSaver.js"></script>
+<script src="../jexcel/tableExport.js"></script>
+<script src="../js/unit.js"></script>
 <script type="text/javascript">
-                $(function () {
-                    $('#dg').edatagrid({
-                        url: '../easyUI/easyUIGetBillings.action',
-                        saveUrl: '../easyUI/easyUISaveBilling.action',
-                        updateUrl: '../easyUI/easyUIUpdateBilling.action',
-                        destroyUrl: '../easyUI/easyUIDelBilling.action'
-                    });
-                });
-            </script>
+    $(function() {
+        $('#dg').edatagrid({
+            url : '../easyUI/easyUIGetBillings.action',
+            saveUrl : '../easyUI/easyUISaveBilling.action',
+            updateUrl : '../easyUI/easyUIUpdateBilling.action',
+            destroyUrl : '../easyUI/easyUIDelBilling.action'
+        });
+    });
+</script>
 <title>管理账单</title>
 </head>
 
@@ -58,22 +63,22 @@ form {
                 href="${pageContext.request.contextPath }/user/rg_lg_do.action?rorl=index">首页</a></li>
             <li><a
                 href="${pageContext.request.contextPath }/admin/billings.jsp">管理账单</a></li>
-                <li><a
+            <li><a
                 href="${pageContext.request.contextPath }/admin/userInfo.jsp">管理用户</a></li>
             <li><a
                 href="${pageContext.request.contextPath }/admin/meter.jsp">管理抄表记录</a></li>
         </ul>
     </div>
-    
-        <div>
+
+    <div>
         <div class="demo-info" style="margin-bottom: 10px">
             <div class="demo-tip icon-tip">&nbsp;</div>
             <div>双击进行修改.</div>
         </div>
 
         <table id="dg" title="账单信息" style="width: 1000px; height: 700px"
-            toolbar="#toolbar" pagination="true" idField="id" rownumbers="true"
-            fitColumns="true" singleSelect="true">
+            toolbar="#toolbar" pagination="true" idField="id"
+            rownumbers="true" fitColumns="true" singleSelect="true">
             <thead>
                 <tr>
                     <th field="userId" width="50"
@@ -96,19 +101,45 @@ form {
             </thead>
         </table>
         <div id="toolbar">
-            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-                onclick="javascript:$('#dg').edatagrid('addRow')">添加</a> <a href="#"
-                class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-                onclick="javascript:$('#dg').edatagrid('destroyRow')">删除</a> <a
-                href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                onclick="javascript:$('#dg').edatagrid('saveRow')">保存</a> <a
-                href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add"
+                plain="true"
+                onclick="javascript:$('#dg').edatagrid('addRow')">添加</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove"
+                plain="true"
+                onclick="javascript:$('#dg').edatagrid('destroyRow')">删除</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-save"
+                plain="true"
+                onclick="javascript:$('#dg').edatagrid('saveRow')">保存</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-undo"
+                plain="true"
                 onclick="javascript:$('#dg').edatagrid('cancelRow')">取消</a>
         </div>
     </div>
 
     <div>
-            <h2>付费状态: 1:已付费     0:未付费</h2>
+        <h2>付费状态: 1:已付费 0:未付费</h2>
     </div>
+
+    <div>
+        <a href="javascript:getBillingTable()">生成可输出excle表格</a>
+    </div>
+
+    <div id="dudutable"></div>
+
+    <div id="export">
+        <a data-type="xls" href="">导出excel</a>
+    </div>
+
+
+    <script>
+        var $exportLink = document.getElementById('export');
+        $exportLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (e.target.nodeName === "A") {
+                tableExport('billings', 'out', e.target
+                        .getAttribute('data-type'));
+            }
+        }, false);
+    </script>
 </body>
 </html>
