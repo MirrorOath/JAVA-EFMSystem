@@ -98,8 +98,14 @@ public class AdminCtl {
             System.out.println("days: " + days);
             if (bil.getIsPaid() != 1)
                 bil.setExCost(days * bil.getCost() / 1000);
-            bil.setYear(bil.getDate().getYear() + 1900);
-            bil.setMonth(bil.getDate().getMonth());
+            if(bil.getDate().getMonth() > 0) {
+                bil.setYear(bil.getDate().getYear() + 1900);
+                bil.setMonth(bil.getDate().getMonth());
+            }
+            else {
+                bil.setYear(bil.getDate().getYear() + 1900 - 1);
+                bil.setMonth(12);
+            }
         }
         return bils;
     }

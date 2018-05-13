@@ -136,7 +136,9 @@ public class UserCtl {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         if (userInfo == null)
             return "redirect:../index.jsp";
-        List<MonthUsed> mu = getMonthUsed(new Date().getYear(), userInfo.getId());
+        List<MonthUsed> mu = new ArrayList<MonthUsed>();
+        mu.addAll(getMonthUsed(new Date().getYear() - 1, userInfo.getId()));
+        mu.addAll(getMonthUsed(new Date().getYear(), userInfo.getId()));
         for (MonthUsed m : mu) {
             System.out.println(m);
         }
@@ -174,22 +176,5 @@ public class UserCtl {
                 return "redirect:../index.jsp";
         }
     }
-
-//    @SuppressWarnings({ "deprecation", "unused" })
-//    private List<UseRecords> delPastRecords(List<UseRecords> Records) {
-//        Date date = new Date();
-//        date.setDate(1);
-//        date.setHours(0);
-//        date.setMinutes(0);
-//        date.setSeconds(0);
-//        System.out.println(date);
-//        for (int i = Records.size() - 1; i >= 0; i--) {
-//            UseRecords item = Records.get(i);
-//            if (date.after(item.getDate())) {
-//                Records.remove(item);
-//            }
-//        }
-//        return Records;
-//    }
 
 }
